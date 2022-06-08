@@ -1,17 +1,30 @@
+image: node:latest
 
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
   - deploy
 
+
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-      echo "Building"
+    - cd my-app
+    - npm update -g npm
+    - npm ci
+
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    
   script:
-      echo "Testing.."
-   
+    -  cd my-app
+    -  npm install firebase
+    -  npm i react-scripts
+    -  npm test
+
+deploy:
+  stage : deploy
+  script:
+  -  echo "Deployed"
+
 
