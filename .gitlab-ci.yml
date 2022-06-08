@@ -25,7 +25,6 @@ unit-test-job:   # This job runs in the test stage.
 deploy:
   stage : deploy
   script:
-  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/drp-askdoc-server.git
   - git push heroku master:main
   - echo "Deployed"
 
