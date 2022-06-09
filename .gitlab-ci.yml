@@ -23,5 +23,7 @@ unit-test-job: # This job runs in the test stage.
 deploy:
   stage : deploy
   script:
-  - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/drp-ask-doc.git HEAD:master
+  - git add .
+  - git commit -am "Deploy to heroku"
+  - git push heroku master
   - echo "Deployed"
