@@ -23,4 +23,4 @@ deploy:
   stage : deploy
   script:
   - gem install dpl
-  - dpl --provider=heroku --app=drp-ask-doc --api_key=19aedee9-ccd7-4bcf-9f8d-1f5daa1ca973
+  - dpl --provider=heroku --app=drp-ask-doc --api_key=$HEROKU_API_KEY
