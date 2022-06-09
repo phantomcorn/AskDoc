@@ -21,7 +21,5 @@ unit-test-job: # This job runs in the test stage.
 deploy:
   stage : deploy
   script:
-  - git config user.email "sg2020@ic.ac.uk"
-  - git add .
-  - git push heroku master
-  - echo "Deployed"
+  - gem install dpl
+  - dpl --provider=heroku --app=my-app-staging --api_key=$HEROKU_API_KEY
