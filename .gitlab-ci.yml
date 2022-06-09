@@ -3,7 +3,7 @@ image: node:latest
 stages: # List of stages for jobs, and their order of execution
   - build
   - test
-  # - deploy
+  - deploy
 
 build-job: # This job runs in the build stage, which runs first.
   stage: build
@@ -19,9 +19,11 @@ unit-test-job: # This job runs in the test stage.
     - npm install firebase
     - npm i react-scripts
     - npm test
-# deploy:
-#   stage : deploy
-#   script:
-#   - git push heroku master:main
-#   - echo "Deployed"
 
+deploy:
+  stage : deploy
+  script:
+  - git add .
+  - git commit -m "Deploying to heroku"
+  - git push heroku master
+  - echo "Deployed"
