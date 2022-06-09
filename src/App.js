@@ -1,4 +1,5 @@
-import Computing from "./pages/Computing";
+import {Computing} from "./pages/Computing";
+import React from 'react';
 import NonComputing from "./pages/NonComputing";
 import './App.css';
 import { BrowserRouter as Router,Route,Routes,Link } from "react-router-dom";
@@ -14,6 +15,7 @@ function App() {
     </Router>
   );
 }
+
 
 
 export default App;
