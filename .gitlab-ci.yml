@@ -1,17 +1,17 @@
-image: node:latest
-
 stages: # List of stages for jobs, and their order of execution
   - build
   - test
   - deploy
 
 build-job: # This job runs in the build stage, which runs first.
+  image: node:latest
   stage: build
   script:
     - npm update -g npm
     - npm ci
 
 unit-test-job: # This job runs in the test stage.
+  image: node:latest
   stage: test
   script:
     - npm install firebase
@@ -19,6 +19,7 @@ unit-test-job: # This job runs in the test stage.
     - npm test
 
 deploy:
+  image: ruby:latest
   stage : deploy
   script:
   - gem install dpl
