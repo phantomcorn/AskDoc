@@ -23,8 +23,5 @@ unit-test-job: # This job runs in the test stage.
 deploy:
   stage : deploy
   script:
-  # - git config user.email "sg2020@ic.ac.uk"
-  # - git add .
-  # - git commit -m "Deploying to heroku"
-  - git push heroku master
+  - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/drp-ask-doc.git HEAD:master
   - echo "Deployed"
