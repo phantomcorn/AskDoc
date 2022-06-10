@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import db, { readThreadsDB } from "../firebase";
+import axios from "axios";
 import {ref, onValue} from "firebase/database"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 
 
 
@@ -16,14 +17,9 @@ export class Computing extends React.Component {
         }
     }
 
-    componentDidMount() {
-        const dbRef = ref(db, 'Threads');
-        onValue(dbRef, (snapshot) => {
-            let res = readThreadsDB();
-            this.setState({threads : res});
-        })
-        
-
+    async componentDidMount() {
+        const updatedThread = await axios.get("http://localhost:3001/api/threads");
+        this.setState({threads : updatedThread.data});
     }
 
     render(){
@@ -38,11 +34,11 @@ export class Computing extends React.Component {
                             <h4>
                                 Questions:
                             </h4>
-                            {this.state.threads.map((thread, index) =>{
+                            {this.state.threads.map((thread) =>{
                                 return (
-                                    <div> 
-                                        <h2> q{index+1} {thread.key} </h2> 
-                                        <div> {thread.data.description} </div>
+                                    <div key={thread._id}> 
+                                        <h2> {thread.title} </h2> 
+                                        <div> {thread.content} </div>
                                         <button>Answer this question</button>
                                     </div>
                                 )

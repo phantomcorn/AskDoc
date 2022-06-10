@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import db, { writeDB } from "../firebase";
 import {getDocs, addDoc, collection} from "@firebase/firestore";
 import map from "../assets/map.png"
+import axios from "axios";
 
 export default function NonComputing() {
     
@@ -11,15 +11,20 @@ export default function NonComputing() {
         e.preventDefault();
         console.log("hello")
         
-        let title = titleRef.current.value;
+        let summary= titleRef.current.value;
         let detail = descriptionRef.current.value;
         
-        if (detail === "" || title === "") {
+        if (detail === "" || summary=== "") {
             alert("You are forgot to fill in a field");
             return
         }
 
-        writeDB(title, detail);
+        const newThread = {
+            title: summary,
+            content : detail
+        };
+
+        await axios.post("http://localhost:3001/api/threads", newThread).then(res => console.log(res.data));
 
         console.log("done");
     }

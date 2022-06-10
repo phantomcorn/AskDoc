@@ -2,7 +2,6 @@
   "name": "askdoc",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -24,7 +23,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node backend/server.js & npm run client",
+    "dev" : "npm run server & npm run client",
+    "server": "nodemon backend/server.js",
+    "client" : "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -54,5 +56,8 @@
     "url": "https://gitlab.doc.ic.ac.uk/pp1120/askdoc.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon" : "^2.0.16"
+  }
 }
