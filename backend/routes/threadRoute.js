@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Thread = require("../models/noteModel");
-const {getThread, setThread, putThread, deleteThread} = require('../controllers/threadController');
+const Thread = require("../models/threadModel");
+const {getThreads, setThread, putThread, deleteThread} = require('../controllers/threadController');
 /*
 router.post((req, res) => {
     const title = req.body.title;
@@ -17,7 +17,7 @@ router.post((req, res) => {
 
 router.post("/", setThread);
 
-router.get("/", getThread);
+router.get("/", getThreads);
 
 router.put("/:id", putThread);
 

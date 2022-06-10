@@ -1,4 +1,4 @@
-import Computing from "./pages/Computing";
+import {Computing} from "./pages/Computing";
 import React from 'react';
 import NonComputing from "./pages/NonComputing";
 import './App.css';
