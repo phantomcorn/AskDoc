@@ -7,7 +7,8 @@ build-job: # This job runs in the build stage, which runs first.
   image: node:latest
   stage: build
   script:
-    - npm ci
+    - npm backend/ci
+
 
 unit-test-job: # This job runs in the test stage.
   image: node:latest
@@ -15,6 +16,7 @@ unit-test-job: # This job runs in the test stage.
   script:
     - npm i react-scripts
     - cd frontend
+    - npm ci
     - npm test
 
 deploy:
