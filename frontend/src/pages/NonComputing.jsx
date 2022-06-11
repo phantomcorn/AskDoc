@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import domain from "../config/host_url"
 import map from "../assets/map.png"
 import axios from "axios";
 
@@ -22,7 +21,7 @@ export default function NonComputing() {
             title: summary,
             content : detail
         };
-        
+
         const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com/computing" : `http://localhost:5000`
         await axios.post(`${domain}/api/threads`, newThread).then(res => console.log(res.data));
 
