@@ -24,4 +24,5 @@ deploy:
   image: ruby:latest
   stage : deploy
   script:
-  - git push heroku mongodb:master
+    - gem install dpl
+    - dpl --provider=heroku --app=drp-ask-doc --api_key=$HEROKU_API_KEY
