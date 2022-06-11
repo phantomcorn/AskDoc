@@ -22,7 +22,7 @@ export default function NonComputing() {
             content : detail
         };
 
-        const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com/computing" : `http://localhost:5000`
+        const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
         await axios.post(`${domain}/api/threads`, newThread).then(res => console.log(res.data));
 
     }
