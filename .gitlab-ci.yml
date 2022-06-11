@@ -15,6 +15,7 @@ unit-test-job: # This job runs in the test stage.
   image: node:latest
   stage: test
   script:
+    - npm test
     - npm i react-scripts
     - cd frontend
     - npm ci
