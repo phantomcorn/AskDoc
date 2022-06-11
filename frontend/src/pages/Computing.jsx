@@ -28,7 +28,7 @@ export class Computing extends React.Component {
         return(
             <div>
                 <h2>
-                    AskDoC
+                    AskDoC 1
                 </h2>
                 <Container>
                     <Row>

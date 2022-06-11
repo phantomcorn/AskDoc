@@ -24,6 +24,5 @@ deploy:
   image: ruby:latest
   stage : deploy
   script:
-  - git add .
-  - git commit -am "deploy"
+  - git pull
   - git push heroku mongodb:master
