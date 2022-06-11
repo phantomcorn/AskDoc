@@ -7,7 +7,8 @@ build-job: # This job runs in the build stage, which runs first.
   image: node:latest
   stage: build
   script:
-    - npm backend/ci
+    - cd backend
+    - npm ci
 
 
 unit-test-job: # This job runs in the test stage.
