@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.27.2",
+    "concurrently": "^7.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -17,10 +18,9 @@
   },
   "scripts": {
     "start": "nodemon backend/server.js",
-    "heroku-postbuild": "npm install --prefix frontend && npm run build --prefix frontend",
-    "dev": "npm start & npm run client",
-    "server": "nodemon backend/server.js",
-    "client": "npm start --prefix frontend"
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm start\" \"npm run client\"",
+    "heroku-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "eslintConfig": {
     "extends": [
