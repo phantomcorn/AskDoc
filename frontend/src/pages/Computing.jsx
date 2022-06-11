@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col'
 
 
 
-export class Computing extends React.Component {
+export default class Computing extends React.Component {
 
     constructor() {
         super();
