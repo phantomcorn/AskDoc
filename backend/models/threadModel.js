@@ -6,6 +6,7 @@ const threadSchema = {
     content : String
 }
 
-const Thread = mongoose.model("Thread", threadSchema)
+//REST API on ThreadsDB.threads
+const Thread = mongoose.model("threads", threadSchema)
 
 module.exports = Thread;

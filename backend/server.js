@@ -11,7 +11,7 @@ app.use(cors());
 
 connectDB()
 
-// http://<HOST_URL>/api/threads will look up actions in noteRoute.js
+// http://<HOST_URL>/api/threads to use REST API (GET,POST)
 app.use("/api/threads", require("./routes/threadRoute"));
 
 // DEPLOYMENT

@@ -17,7 +17,7 @@
     "serve": "^13.0.2"
   },
   "scripts": {
-    "start" : "node backend/server.js",
+    "start": "node backend/server.js",
     "start:dev": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm start\" \"npm run client\"",
