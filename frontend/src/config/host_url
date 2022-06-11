@@ -1,2 +1,0 @@
-
-export const host_url = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com/computing" : `http://localhost:5000`
