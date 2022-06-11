@@ -13,8 +13,8 @@ unit-test-job: # This job runs in the test stage.
   image: node:latest
   stage: test
   script:
-    - npm install firebase
     - npm i react-scripts
+    - cd frontend
     - npm test
 
 deploy:
