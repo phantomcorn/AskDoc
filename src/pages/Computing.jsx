@@ -18,7 +18,7 @@ export class Computing extends React.Component {
     }
 
     async componentDidMount() {
-        const updatedThread = await axios.get("http://localhost:3001/api/threads");
+        const updatedThread = await axios.get("http://localhost:5000/api/threads");
         this.setState({threads : updatedThread.data});
     }
 
