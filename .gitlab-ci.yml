@@ -7,19 +7,22 @@ build-job: # This job runs in the build stage, which runs first.
   image: node:latest
   stage: build
   script:
+    - cd backend
     - npm ci
+
 
 unit-test-job: # This job runs in the test stage.
   image: node:latest
   stage: test
   script:
-    - npm install firebase
     - npm i react-scripts
+    - cd frontend
+    - npm ci
     - npm test
 
 deploy:
   image: ruby:latest
   stage : deploy
   script:
-  - gem install dpl
-  - dpl --provider=heroku --app=drp-ask-doc --api_key=$HEROKU_API_KEY
+    - gem install dpl
+    - dpl --provider=heroku --app=drp-askdoc --api_key=$HEROKU_API_KEY

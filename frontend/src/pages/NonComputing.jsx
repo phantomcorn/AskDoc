@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
-import db, { writeDB } from "../firebase";
-import {getDocs, addDoc, collection} from "@firebase/firestore";
 import map from "../assets/map.png"
+import axios from "axios";
 
 export default function NonComputing() {
     
@@ -9,19 +8,23 @@ export default function NonComputing() {
     const descriptionRef = useRef();
     const handleSave = async (e) => {
         e.preventDefault();
-        console.log("hello")
         
-        let title = titleRef.current.value;
+        let summary= titleRef.current.value;
         let detail = descriptionRef.current.value;
         
-        if (detail === "" || title === "") {
+        if (detail === "" || summary=== "") {
             alert("You are forgot to fill in a field");
             return
         }
 
-        writeDB(title, detail);
+        const newThread = {
+            title: summary,
+            content : detail
+        };
 
-        console.log("done");
+        const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
+        await axios.post(`${domain}/api/threads`, newThread).then(res => console.log(res.data));
+
     }
 
     return (
