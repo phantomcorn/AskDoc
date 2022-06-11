@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import {ref, onValue} from "firebase/database"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'

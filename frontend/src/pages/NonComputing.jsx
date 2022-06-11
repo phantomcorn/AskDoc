@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import {getDocs, addDoc, collection} from "@firebase/firestore";
 import map from "../assets/map.png"
 import axios from "axios";
 
