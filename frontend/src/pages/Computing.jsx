@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import {host_url} from "../config/host_url"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -17,7 +18,9 @@ export class Computing extends React.Component {
     }
 
     async componentDidMount() {
-        const updatedThread = await axios.get("http://localhost:5000/api/threads");
+        const host = `${host_url}:5000/api/threads`;
+        console.log(host_url)
+        const updatedThread = await axios.get();
         this.setState({threads : updatedThread.data});
     }
 

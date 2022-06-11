@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import {host_url} from "../config/host_url"
 import map from "../assets/map.png"
 import axios from "axios";
 
@@ -8,7 +9,6 @@ export default function NonComputing() {
     const descriptionRef = useRef();
     const handleSave = async (e) => {
         e.preventDefault();
-        console.log("hello")
         
         let summary= titleRef.current.value;
         let detail = descriptionRef.current.value;
@@ -23,9 +23,8 @@ export default function NonComputing() {
             content : detail
         };
 
-        await axios.post("http://localhost:5000/api/threads", newThread).then(res => console.log(res.data));
+        await axios.post(`${host_url}/api/threads`, newThread).then(res => console.log(res.data));
 
-        console.log("done");
     }
 
     return (
