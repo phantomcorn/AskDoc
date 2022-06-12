@@ -32,8 +32,8 @@ export default function UpdateProfile() {
 
       Promise.all(promises).then(() => {
         navi('/')
-      }).catch(() => {
-          setError('Failed to update account')
+      }).catch((err) => {
+          setError('Failed to update account: ' + err.message)
       }).finally(() => {
           setLoading(false)
       })

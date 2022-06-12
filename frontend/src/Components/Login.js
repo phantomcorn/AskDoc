@@ -20,7 +20,7 @@ export default function Signup() {
           await login(emailRef.current.value, passwordRef.current.value)
           navi("/")
       } catch(err) {
-          setError('Failed to login in')
+          setError('Failed to login in: ' + err.message)
       }
 
       setLoading(false)
