@@ -13,6 +13,7 @@ connectDB()
 
 // http://<HOST_URL>/api/threads to use REST API (GET,POST)
 app.use("/api/threads", require("./routes/threadRoute"));
+app.use("/api/accounts", require("./routes/accountRoute"));
 
 // DEPLOYMENT
 __dirname = path.resolve();
