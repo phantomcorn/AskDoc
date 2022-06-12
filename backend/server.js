@@ -29,6 +29,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, function() {
     console.log(
-        "express server running on port 5000"
+        `express server running on port ${PORT}`
     )
 })

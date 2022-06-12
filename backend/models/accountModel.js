@@ -6,6 +6,7 @@ const accountSchema = {
     password : String
 }
 
-const Account = mongoose.model("Account", accountSchema)
+//REST API on ThreadsDB.accounts
+const Account = mongoose.model("accounts", accountSchema)
 
 module.exports = Account;
