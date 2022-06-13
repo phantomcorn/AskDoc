@@ -26,9 +26,6 @@ export default class Computing extends React.Component {
     render(){
         return(
             <div>
-                <h2>
-                    AskDoC 1
-                </h2>
                 <Container>
                     <Row>
                         <Col>
@@ -44,12 +41,6 @@ export default class Computing extends React.Component {
                                     </div>
                                 )
                             })}
-                        </Col>
-                        <Col>
-                            <h4>Profile (Asker)</h4>
-                            <div> Name : Papa mama</div>
-                            <div> Email : pa@ic.ac.uk </div>
-                            <div> Phone no. : 07552377182 </div>
                         </Col>
                     </Row>
                 </Container>

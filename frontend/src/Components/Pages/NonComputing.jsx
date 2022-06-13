@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import map from "../assets/map.png"
+import map from "../../assets/map.png"
 import axios from "axios";
 
 export default function NonComputing() {

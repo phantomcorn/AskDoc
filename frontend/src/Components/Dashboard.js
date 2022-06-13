@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import {Card, Button, Alert} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import Computing from "./pages/Computing";
+import NonComputing from "./pages/NonComputing";
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -21,7 +23,7 @@ export default function Dashboard() {
 
   return ( currentUser.computing?
       <>
-        <div> Computing </div>
+        <Computing />
         <Card>
           <Card.Body>
               <h2 className="text-center mb-4">Profile</h2>

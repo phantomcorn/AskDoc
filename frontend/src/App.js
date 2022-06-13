@@ -1,13 +1,13 @@
 import React from 'react';
-import Computing from "./pages/Computing";
-import NonComputing from "./pages/NonComputing";
+import Computing from "./components/pages/Computing";
+import NonComputing from "./components/pages/NonComputing";
 import './App.css';
-import SignUp from "./Components/SignUp";
-import Login from "./Components/Login";
-import Dashboard from "./Components/Dashboard";
-import ForgotPassword from "./Components/ForgotPassword";
-import PrivateRoute from './Components/PrivateRoute'
-import UpdateProfile from "./Components/UpdateProfile"
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import ForgotPassword from "./components/ForgotPassword";
+import PrivateRoute from './components/PrivateRoute'
+import UpdateProfile from "./components/UpdateProfile"
 import { BrowserRouter as Router,Route,Routes,Link } from "react-router-dom";
 import {Container} from 'react-bootstrap'
 import {AuthProvider} from "./contexts/AuthContext"

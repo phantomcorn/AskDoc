@@ -63,7 +63,6 @@ describe('threads collection rest api', () => {
           })
           .then(() => Thread.find())
           .then(threads => {
-            console.log(threads)
             expect(threads.length).to.equal(2)
             expect(threads[1].content).to.equal("Updated")
           })
