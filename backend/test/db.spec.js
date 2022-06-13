@@ -67,4 +67,5 @@ describe('threads collection rest api', () => {
             expect(threads[1].content).to.equal("Updated")
           })
     })
+
 })

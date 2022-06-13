@@ -42,7 +42,7 @@ export default function Dashboard() {
       </>
       :
       <>
-        <div> Non-Computing </div>
+        <NonComputing />
         <Card>
           <Card.Body>
               <h2 className="text-center mb-4">Profile</h2>

@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 //model for database
 const threadSchema = {
     title : String,
-    content : String
+    content : String,
+    owner: String,
 }
 
 //REST API on ThreadsDB.threads

@@ -14,12 +14,21 @@ const setThread = asyncHandler(async (req, res) => {
         throw new Error("A field is currently missing")
     }
 
-    const thread = await Thread.create({
-        title : req.body.title,
-        content : req.body.content
-    })
+    const threadAsked = await Thread.findOne({owner : req.body.owner})
 
-    res.status(200).json(thread)
+    //non-computing student can only ask a question each time
+    if (threadAsked === null) {
+        const thread = await Thread.create({
+            title : req.body.title,
+            content : req.body.content,
+            owner : req.body.owner,
+            asked : false
+        })
+    
+        res.status(200).json(thread)
+    } else {
+        res.status(200).send({message : "Can ask only 1 question each time"})
+    }
     
   
 })

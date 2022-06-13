@@ -1,16 +1,20 @@
 import React, { useRef } from 'react';
 import map from "../../assets/map.png"
 import axios from "axios";
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function NonComputing() {
-    
+
+    const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
+    const {currentUser} = useAuth();
     const titleRef = useRef();
-    const descriptionRef = useRef();
+    const contentRef = useRef();
     const handleSave = async (e) => {
         e.preventDefault();
         
+
         let summary= titleRef.current.value;
-        let detail = descriptionRef.current.value;
+        let detail = contentRef.current.value;
         
         if (detail === "" || summary=== "") {
             alert("You are forgot to fill in a field");
@@ -19,11 +23,17 @@ export default function NonComputing() {
 
         const newThread = {
             title: summary,
-            content : detail
+            content : detail,
+            owner: currentUser.email
         };
 
-        const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
-        await axios.post(`${domain}/api/threads`, newThread).then(res => console.log(res.data));
+        
+
+        await axios.post(`${domain}/api/threads`, newThread).then(function(res) {
+            if (res.data.message) {
+                alert(res.data.message);
+            }
+        });
 
     }
 
@@ -33,10 +43,10 @@ export default function NonComputing() {
             <form onSubmit={handleSave}>
                 <label>Enter Message</label>
                 <input type="title" placeholder="Title/Summary" ref={titleRef}/>
-                <textarea type="description" placeholder="Details/Description" ref={descriptionRef}>
+                <textarea type="description" placeholder="Details/Description" ref={contentRef}>
                 </textarea>
                 <h4> Pin your location</h4>
-                <img src={map} alt="Map"></img>
+                <img src={map} alt="Map" className='map'></img>
                 <button type="submit"> Post a question </button>
             </form>
         </div>
