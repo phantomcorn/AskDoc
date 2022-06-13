@@ -10,6 +10,7 @@ export default function Signup() {
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [computingAcc, setAcc] = useState(true)
   const navi = useNavigate()
   
   async function handleSubmit(e) {
@@ -22,13 +23,19 @@ export default function Signup() {
       try {
           setError("")
           setLoading(true)
-          await signup(emailRef.current.value, passwordRef.current.value)
+          await signup(emailRef.current.value, passwordRef.current.value, computingAcc)
           navi("/")
       } catch(err) {
           setError('Failed to create an account: ' + err.message)
       }
 
       setLoading(false)
+
+      
+  }
+
+  function handleAccType(e) {
+        setAcc(!computingAcc)
   }
 
   return (
@@ -49,6 +56,10 @@ export default function Signup() {
                 <Form.Group id="password-confirm">
                     <Form.Label>Password Confirmation</Form.Label>
                     <Form.Control type="password" ref={passwordConfirmRef} required />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Check type="radio" checked={computingAcc} onChange={handleAccType} label="Computing"/>
+                    <Form.Check type="radio" checked={!computingAcc} onChange={handleAccType} label="Non-Computing"/>
                 </Form.Group>
                 <Button disabled={loading} className="w-100 mt-3" type="submit">
                     Sign Up

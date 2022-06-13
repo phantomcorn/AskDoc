@@ -18,7 +18,6 @@ export default class Computing extends React.Component {
 
     async componentDidMount() {        
         const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
-        console.log(domain)
         const host = `${domain}/api/threads`;
         const updatedThread = await axios.get(host);
         this.setState({threads : updatedThread.data});

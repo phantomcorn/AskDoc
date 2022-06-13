@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 //model for database
 const accountSchema = {
     email : String,
-    password : String
+    password : String,
+    computing : Boolean
 }
 
 //REST API on ThreadsDB.accounts

@@ -10,7 +10,7 @@ const signup = asyncHandler(async (req, res) => {
         throw new Error("A field is currently missing")
     }
 
-    const {email,password} = req.body
+    const {email,password,computing} = req.body
 
     Account.findOne({email: email}, (err, user) => {
         res.status(200)
@@ -20,13 +20,14 @@ const signup = asyncHandler(async (req, res) => {
         } else {
             const account = new Account({
                 email, 
-                password
+                password,
+                computing
             })
             account.save(err => {
                 if (err) {
                     res.status(400).send(err)
                 } else {
-                    res.status(200).send({email: email, password: password})
+                    res.status(200).send({email: email, password: password, computing: computing})
                 }
             })
         }
@@ -47,7 +48,7 @@ const login = asyncHandler(async (req, res) => {
         
         if(user) {
             if(password === user.password) {
-                res.status(200).send({email: email, password: password})
+                res.status(200).send({email: email, password: password, computing: user.computing})
             } else {
                 res.status(400).send({message: "Incorrect password"})
             }
@@ -117,7 +118,7 @@ const updateemail = asyncHandler(async (req, res) => {
             if (!user) {
                 let updatedUser = await Account.updateOne({email: email}, {$set: {email: newemail}})
                 if (updatedUser) {
-                    res.status(200).send({email: newemail, password: password})
+                    res.status(200).send({email: newemail, password: password, computing: updatedUser.computing})
                 } else {
                     res.status(500).send({message: "Failed to update email"})
                 }
@@ -145,7 +146,7 @@ const updatepassword = asyncHandler(async (req, res) => {
         if(password === user.password) {
             let updatedUser = await Account.updateOne({email: email}, {$set: {password: newpassword}})
             if (updatedUser) {
-                res.status(200).send({email: email, password: newpassword})
+                res.status(200).send({email: email, password: newpassword, computing: updatedUser.computing})
             } else {
                 res.status(500).send({message: "Failed to update password"})
             }
