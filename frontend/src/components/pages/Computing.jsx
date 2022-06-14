@@ -11,12 +11,10 @@ export default function Computing() {
     const [threads, setThreads] = useState([]);
 
     useEffect(() => {
-
         const getThreads = (async () => {
             const updatedThreads = await axios.get(host)
             setThreads(updatedThreads.data)
         })
-
 
         getThreads()
     },[])
