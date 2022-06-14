@@ -40,6 +40,15 @@ export default function NonComputing() {
         });
     }
 
+    function Map() {
+        return(
+            <>
+                <h4> Pin your location</h4>
+                <img src={map} alt="Map" className='map'></img>
+            </>
+        );
+    }
+
     return (
         <>
         <Card>
@@ -52,8 +61,6 @@ export default function NonComputing() {
                     <Form.Label>Enter Problem</Form.Label>
                     <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
                 </Form.Group>
-                <h4> Pin your location</h4>
-                <img src={map} alt="Map" className='map'></img>
                 <Button className="w-100 mt-3" type="submit">
                     Post a question
                 </Button>
