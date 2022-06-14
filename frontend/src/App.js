@@ -33,7 +33,7 @@ function App() {
                     <UpdateProfile />
                   </PrivateRoute>
                 } />
-                <Route path="/waitForHelp" element={
+                <Route path="/wait-for-help" element={
                   <PrivateRoute>
                     <WaitForHelp />
                   </PrivateRoute>
