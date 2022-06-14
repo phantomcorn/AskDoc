@@ -5,20 +5,36 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link } from "react-router-dom";
 
+import io from 'socket.io-client';
+import { useAuth } from '../../contexts/AuthContext';
+
+var socket;
+
 
 export default function Computing() {
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : "http://localhost:5000"
     const host = `${domain}/api/threads`;
     const [threads, setThreads] = useState([]);
+    const {currentUser} = useAuth();
 
     useEffect(() => {
-        const getThreads = (async () => {
-            const updatedThreads = await axios.get(host)
-            setThreads(updatedThreads.data)
-        })
+        {/* Connect this user to the socket */}
+        socket = io(domain);
+        {/* Send signal to the socket that this user is observing threads db */}
+        socket.emit("observe threads db", currentUser);
 
-        getThreads()
+        const getThreads = async () => {
+          const updatedThreads = await axios.get(host)
+          setThreads(updatedThreads.data)
+        }
+        
+        getThreads();
     },[])
+
+    useEffect(() => {
+      {/* Controller listening for the event "new thread" */}
+      socket.on("new thread", (newThread) => setThreads([...threads, newThread]))
+    })
 
 
     function handleSubmit(e) {

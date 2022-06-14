@@ -5,15 +5,22 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
+import io from 'socket.io-client';
+
+var socket;
+
 export default function NonComputing() {
 
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
     const {currentUser} = useAuth();
     const titleRef = useRef();
     const contentRef = useRef();
-    const navi = useNavigate()
+    const navi = useNavigate();
     
     const handleSave = async (e) => {
+        {/* Connect this user to the socket */}
+        socket = io(domain);
+
         e.preventDefault();
 
         let summary= titleRef.current.value;
@@ -35,6 +42,8 @@ export default function NonComputing() {
             if (res.data.message) {
                 alert(res.data.message);
             } else {
+              {/* Notify the socket for the event "new question posted" */}
+              socket.emit("new question posted", res.data);
               navi('/wait-for-help');
             }
         });
