@@ -3,6 +3,7 @@ import map from "../../assets/map.png"
 import axios from "axios";
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 export default function NonComputing() {
 
@@ -40,16 +41,22 @@ export default function NonComputing() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSave}>
-                <label>Enter Message</label>
-                <input type="title" placeholder="Title/Summary" ref={titleRef}/>
-                <textarea type="description" placeholder="Details/Description" ref={contentRef}>
-                </textarea>
+        <Card>
+            <Form onSubmit={handleSave}>
+                <Form.Group id="title">
+                    <Form.Label>Enter Message Title</Form.Label>
+                    <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
+                </Form.Group>
+                <Form.Group id="desc">
+                    <Form.Label>Enter Problem</Form.Label>
+                    <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
+                </Form.Group>
                 <h4> Pin your location</h4>
                 <img src={map} alt="Map" className='map'></img>
-                <button type="submit"> Post a question </button>
-            </form>
-        </div>
+                <Button className="w-100 mt-3" type="submit">
+                    Post a question
+                </Button>
+            </Form>
+        </Card>
     );
 }

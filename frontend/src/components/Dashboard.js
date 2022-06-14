@@ -28,6 +28,7 @@ export default function Dashboard() {
               <h2 className="text-center mb-4">Profile</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <strong>Email:</strong> {currentUser.email}
+              <strong> User: </strong> {currentUser.computing ? "computing" : "non-computing"}
               <Link to="/answer" className="btn btn-primary w-100 mt-3">
                   Answer a question
               </Link>
@@ -50,6 +51,7 @@ export default function Dashboard() {
               <h2 className="text-center mb-4">Profile</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <strong>Email:</strong> {currentUser.email}
+              <strong> User: </strong> {currentUser.computing? "computing" : "non-computing"}
               <Link to="/ask" className="btn btn-primary w-100 mt-3">
                   Ask a question
               </Link>
