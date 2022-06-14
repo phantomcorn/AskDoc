@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import ForgotPassword from "./components/ForgotPassword";
 import PrivateRoute from './components/PrivateRoute'
 import UpdateProfile from "./components/UpdateProfile"
+import WaitForHelp from './components/WaitForHelp';
 import { BrowserRouter as Router,Route,Routes,Link } from "react-router-dom";
 import {Container} from 'react-bootstrap'
 import {AuthProvider} from "./contexts/AuthContext"
@@ -31,6 +32,11 @@ function App() {
                 <Route path="/update-profile" element={
                   <PrivateRoute>
                     <UpdateProfile />
+                  </PrivateRoute>
+                } />
+                <Route path="/waitForHelp" element={
+                  <PrivateRoute>
+                    <WaitForHelp />
                   </PrivateRoute>
                 } />
                 <Route path="/signup" element={ 
