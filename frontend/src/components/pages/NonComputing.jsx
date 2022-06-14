@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import map from "../../assets/map.png"
 import axios from "axios";
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 export default function NonComputing() {
@@ -41,6 +41,7 @@ export default function NonComputing() {
     }
 
     return (
+        <>
         <Card>
             <Form onSubmit={handleSave}>
                 <Form.Group id="title">
@@ -58,5 +59,9 @@ export default function NonComputing() {
                 </Button>
             </Form>
         </Card>
+        <div className="w-100  text-center mt-3">
+            <Link to="/"><h2>Cancel</h2></Link>
+        </div>
+        </>
     );
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Link } from "react-router-dom";
 
 
 export default function Computing() {
@@ -27,6 +28,7 @@ export default function Computing() {
     }
 
     return(
+        <>
         <div>
             <Container>
                 <Row>
@@ -47,6 +49,10 @@ export default function Computing() {
                 </Row>
             </Container>
         </div>
+        <div className="w-100  text-center mt-3">
+            <Link to="/"><h2>Cancel</h2></Link>
+        </div>
+        </>
     )
 }
 /*
