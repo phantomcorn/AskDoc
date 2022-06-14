@@ -22,7 +22,7 @@ const setThread = asyncHandler(async (req, res) => {
             title : req.body.title,
             content : req.body.content,
             owner : req.body.owner,
-            asked : false
+            answer : ""
         })
     
         res.status(200).json(thread)

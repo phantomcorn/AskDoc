@@ -9,9 +9,9 @@ export default function NonComputing() {
     const {currentUser} = useAuth();
     const titleRef = useRef();
     const contentRef = useRef();
+    
     const handleSave = async (e) => {
         e.preventDefault();
-        
 
         let summary= titleRef.current.value;
         let detail = contentRef.current.value;
@@ -24,10 +24,9 @@ export default function NonComputing() {
         const newThread = {
             title: summary,
             content : detail,
-            owner: currentUser.email
-        };
-
-        
+            owner: currentUser.email,
+            answer : ""
+        }
 
         await axios.post(`${domain}/api/threads`, newThread).then(function(res) {
             if (res.data.message) {
