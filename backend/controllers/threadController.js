@@ -44,9 +44,16 @@ const putThread = asyncHandler(async (req,res) => {
         throw new Error("Unable to find thread")
     }
 
+    const newBody = {
+        title : threadToUpdate.title,
+        content: threadToUpdate.content,
+        owner : threadToUpdate.owner,
+        answer : req.body.answer
+    }
+
     //update value of new thread
     const updatedThread = await Thread.findByIdAndUpdate(req.params.id, 
-        req.body, {
+        newBody, {
             new: true
         })
 

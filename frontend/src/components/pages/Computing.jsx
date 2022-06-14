@@ -40,7 +40,12 @@ export default function Computing() {
     function handleSubmit(e) {
         e.preventDefault()
         const id = e.target.value
-        console.log(e.target.value)
+        const threadToUpdate = {
+            id : id,
+            answer : currentUser.email
+        }
+
+        axios.put(`${host}/${id}`, threadToUpdate)
     }
 
     return(
