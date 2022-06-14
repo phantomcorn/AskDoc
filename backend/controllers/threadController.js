@@ -3,7 +3,7 @@ const Thread = require("../models/threadModel")
 
 // @route GET /api/retrieve/
 const getThreads = asyncHandler(async (req, res) => {
-    const threads = await Thread.find()
+    const threads = await Thread.find({answer : ""})
     res.status(200).json(threads)
 })
 
