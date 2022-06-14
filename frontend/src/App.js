@@ -1,4 +1,5 @@
 import React from 'react';
+import Computing from "./components/pages/Computing"
 import NonComputing from "./components/pages/NonComputing";
 import './App.css';
 import SignUp from "./components/SignUp";
@@ -41,6 +42,11 @@ function App() {
                 <Route path="/ask" element={
                   <PrivateRoute>
                     <NonComputing />
+                  </PrivateRoute>
+                } />
+                <Route path="/answer" element={
+                  <PrivateRoute>
+                    <Computing />
                   </PrivateRoute>
                 } />
                 <Route path="/signup" element={ 
