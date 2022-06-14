@@ -44,10 +44,6 @@ function App() {
                 } />
               </Routes>
             </AuthProvider>
-            <Routes>
-                <Route path="/computing" element={<Computing />} />
-                <Route path="/non_computing" element={<NonComputing />} />
-            </Routes>
         </Router>
       </div>
     </Container>

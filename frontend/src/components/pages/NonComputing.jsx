@@ -38,7 +38,6 @@ export default function NonComputing() {
 
     return (
         <div>
-            <button type="logout"> Logout </button>
             <form onSubmit={handleSave}>
                 <label>Enter Message</label>
                 <input type="title" placeholder="Title/Summary" ref={titleRef}/>
