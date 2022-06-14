@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import map from "../../assets/map.png"
 import axios from "axios";
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from "react-router-dom";
 
 export default function NonComputing() {
 
@@ -9,6 +10,7 @@ export default function NonComputing() {
     const {currentUser} = useAuth();
     const titleRef = useRef();
     const contentRef = useRef();
+    const navi = useNavigate()
     
     const handleSave = async (e) => {
         e.preventDefault();
@@ -31,9 +33,10 @@ export default function NonComputing() {
         await axios.post(`${domain}/api/threads`, newThread).then(function(res) {
             if (res.data.message) {
                 alert(res.data.message);
+            } else {
+              navi('/waitForHelp');
             }
         });
-
     }
 
     return (
