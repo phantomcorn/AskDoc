@@ -34,7 +34,7 @@ export default function NonComputing() {
             if (res.data.message) {
                 alert(res.data.message);
             } else {
-              navi('/waitForHelp');
+              navi('/wait-for-help');
             }
         });
     }
