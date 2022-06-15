@@ -53,7 +53,12 @@ export default function Computing() {
         const updatedThread = await axios.put(`${threadHost}/${id}`, threadToUpdate)
         socket.emit("picks a question", {email: currentUser.email, id: id});
         const asker = await axios.get(`${accountHost}/answer`, {params : {email : updatedThread.data.owner}})
-        navi("/asker-info", {state : {asker : asker.data}})
+        navi("/asker-info", {
+            state : {
+                asker : asker.data,
+                thread : updatedThread.data
+            }
+        })
     }
 
     function tag1filter(thread) {
