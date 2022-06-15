@@ -1,11 +1,14 @@
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom"
+import io from 'socket.io-client';
 
 interface askerInfo {
     name : String, 
     email: String, 
     phone : String
 };
+
+var socket;
 
 export default function AskerInfo() {
 
@@ -16,7 +19,11 @@ export default function AskerInfo() {
     const thread = location.state.thread
     
     const handleCancel = async () => {
-        await axios.put(`${threadHost}/return/${thread._id}`)
+        const res = await axios.put(`${threadHost}/return/${thread._id}`)
+        {/* Connect this user to the socket */}
+        socket = io(domain);
+        {/* Notify the socket for the event "new question posted" */}
+        socket.emit("new question posted", res.data);
     }
 
     const handleRemove = async () => {
