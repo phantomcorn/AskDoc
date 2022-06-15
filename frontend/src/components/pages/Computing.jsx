@@ -5,7 +5,6 @@ import { Container, Button, Row, Col, Form } from 'react-bootstrap'
 import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 var socket;
 
