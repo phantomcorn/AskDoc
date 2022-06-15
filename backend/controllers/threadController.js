@@ -1,13 +1,13 @@
 const asyncHandler = require('express-async-handler')
 const Thread = require("../models/threadModel")
 
-// @route GET /api/retrieve/
+// @route GET /api/threads
 const getThreads = asyncHandler(async (req, res) => {
     const threads = await Thread.find({answer : ""})
     res.status(200).json(threads)
 })
 
-// @route POST /api/retrieve/
+// @route POST /api/threads
 const setThread = asyncHandler(async (req, res) => {
     if (!req.body.title || !req.body.content) {
         res.status(400)
@@ -35,7 +35,7 @@ const setThread = asyncHandler(async (req, res) => {
   
 })
 
-// @route PUT /api/retrieve/:id
+// @route PUT /api/threads/:id
 const putThread = asyncHandler(async (req,res) => {
 
     //find thread to update
@@ -64,7 +64,7 @@ const putThread = asyncHandler(async (req,res) => {
     res.status(200).json(updatedThread)
 })
 
-// @route DELETE /api/retrieve/:id
+// @route DELETE /api/threads/:id
 const deleteThread = asyncHandler(async (req,res) => {
 
     //find thread to delete
@@ -80,7 +80,37 @@ const deleteThread = asyncHandler(async (req,res) => {
     res.status(200).json({id : req.params.id})
 })
 
+// @route UPDATED /api/threads/:id
+// change thread to answerable
+const returnThread = asyncHandler(async (req,res) => {
+
+    //find thread to update
+    const threadToUpdate = await Thread.findById(req.params.id)
+
+    if (!threadToUpdate) {
+        res.status(400)
+        throw new Error("Unable to find thread")
+    }
+
+    const newBody = {
+        tag1 : threadToUpdate.tag1,
+        tag2 : threadToUpdate.tag2,
+        title : threadToUpdate.title,
+        content: threadToUpdate.content,
+        owner : threadToUpdate.owner,
+        answer : ""
+    }
+
+    //update value of new thread
+    const updatedThread = await Thread.findByIdAndUpdate(req.params.id, 
+        newBody, {
+            new: true
+        })
+
+    res.status(200).json(updatedThread)
+})
+
 
 module.exports = {
-    getThreads, setThread, putThread, deleteThread
+    getThreads, setThread, putThread, deleteThread, returnThread
 }

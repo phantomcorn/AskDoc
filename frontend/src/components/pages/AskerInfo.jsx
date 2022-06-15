@@ -16,8 +16,7 @@ export default function AskerInfo() {
     const thread = location.state.thread
     
     const handleCancel = async () => {
-        
-        console.log("cancel thread")
+        await axios.put(`${threadHost}/return/${thread._id}`)
     }
 
     const handleRemove = async () => {
