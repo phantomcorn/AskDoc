@@ -10,7 +10,7 @@ const signup = asyncHandler(async (req, res) => {
         throw new Error("A field is currently missing")
     }
 
-    const {email,password,computing} = req.body
+    const {name,email,password,computing,phone} = req.body
 
     Account.findOne({email: email}, (err, user) => {
         res.status(200)
@@ -19,15 +19,23 @@ const signup = asyncHandler(async (req, res) => {
             res.status(400).send({message: "User already registered"})
         } else {
             const account = new Account({
+                name,
                 email, 
                 password,
-                computing
+                computing,
+                phone
             })
             account.save(err => {
                 if (err) {
                     res.status(400).send(err)
                 } else {
-                    res.status(200).send({email: email, password: password, computing: computing})
+                    res.status(200).send({
+                        name : name,
+                        email: email, 
+                        password: password, 
+                        computing: computing,
+                        phone : phone
+                    })
                 }
             })
         }

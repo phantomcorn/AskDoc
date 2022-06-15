@@ -18,11 +18,14 @@ export function AuthProvider({children}) {
   const hostUpdateEmail = `${domain}/api/accounts/update-email`;
   const hostUpdatePassword = `${domain}/api/accounts/update-password`;
 
-  function signup(em, pw, accType) {
+  function signup(newAcc) {
+    
     const newAccount = {
-      email: em,
-      password: pw,
-      computing: accType
+      name : newAcc.name,
+      email: newAcc.email,
+      password: newAcc.password,
+      computing: newAcc.computing,
+      phone : newAcc.phone
     };
     
     return axios.post(hostSignup, newAccount).then(function(res) {
@@ -33,11 +36,10 @@ export function AuthProvider({children}) {
     })
   }
 
-  function login(em, pw, accType) {
+  function login(em, pw) {
     const targetAccount = {
       email: em,
-      password: pw,
-      computing: accType
+      password: pw
     };
 
     return axios.post(hostLogin, targetAccount).then(function(res) {
