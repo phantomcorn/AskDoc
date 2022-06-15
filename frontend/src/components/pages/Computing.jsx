@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Button, Row, Col, Form } from 'react-bootstrap'
 import io from 'socket.io-client';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 var socket;
@@ -17,7 +16,8 @@ export default function Computing() {
     const accountHost = `${domain}/api/accounts`;
     const [threads, setThreads] = useState([]);
     const {currentUser} = useAuth();
-    const navi = useNavigate()
+    const navi = useNavigate();
+    
 
     const getThreads = async () => {
       const updatedThreads = await axios.get(threadHost)
@@ -51,7 +51,8 @@ export default function Computing() {
         }
 
         const updatedThread = await axios.put(`${threadHost}/${id}`, threadToUpdate)
-        socket.emit("picks a question", {email: currentUser.email, id: id});
+        const helper = await axios.get(`${accountHost}/answer`, {params : {email : currentUser.email}});
+        socket.emit("picks a question", {helper: helper.data, id: id, askerEmail: updatedThread.data.owner});
         const asker = await axios.get(`${accountHost}/answer`, {params : {email : updatedThread.data.owner}})
         navi("/asker-info", {
             state : {

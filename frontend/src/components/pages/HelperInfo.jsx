@@ -12,47 +12,53 @@ interface askerInfo {
 
 var socket;
 
-export default function AskerInfo() {
+export default function HelperInfo() {
 
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : "http://localhost:5000"
     const threadHost = `${domain}/api/threads`;
     const location = useLocation();
-    const asker = location.state.asker
+    const helper = location.state.helper
     const thread = location.state.thread
-    const {currentUser} = useAuth();
     const navi = useNavigate();
+    const {currentUser} = useAuth();
     
-    const handleCancel = async () => {
+    const handleCancel = async e => {
+        e.preventDefault()
         const res = await axios.put(`${threadHost}/return/${thread._id}`)
-        socket.emit("notify cancel to asker", asker);
+        socket.emit("notify cancel to helper", helper);
 
         {/* Notify the socket for the event "new question posted" */}
         socket.emit("new question posted", res.data);
+        navi('/wait-for-help', {
+          state : {
+            thread : thread
+          }
+        })
     }
 
     const handleRemove = async () => {
         await axios.delete(`${threadHost}/${thread._id}`);
-        socket.emit("notify finish to asker", asker);
+        socket.emit("notify finish to helper", helper);
     }
 
     useEffect(() => {
         {/* Connect this user to the socket */}
         socket = io(domain);
-        socket.emit("look at asker info", currentUser);
+        socket.emit("look at helper info", currentUser);
     }, []);
 
     useEffect(() => {
-        {/* If asker clicks cancel before helper */}
-        socket.on("asker cancels", () => navi('/', {
+        {/* If helper clicks cancel before asker */}
+        socket.on("helper cancels", () => navi('/wait-for-help', {
           state : {
-            message : "Asker cancels your help",
+            message : "Helper cancels your question",
             thread : thread
           }
         }));
-        {/* If asker clicks finish before helper */}
-        socket.on("asker finishes", () => navi('/', {
+        {/* If helper clicks finish before asker */}
+        socket.on("helper finishes", () => navi('/', {
           state : {
-            message : "The asker finishes the session. Thank for helping :)",
+            message : "The helper finishes answering your question. Thank for asking :)",
           }
         }));
     })
@@ -66,9 +72,9 @@ export default function AskerInfo() {
             <div className="w-100 text-center mt-3">
                 <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
             </div>
-            <h2> Name : {asker.name} </h2>
-            <h2> Email : {asker.email} </h2>
-            <h2> Phone no. : {asker.phone} </h2>
+            <h2> Name : {helper.name} </h2>
+            <h2> Email : {helper.email} </h2>
+            <h2> Phone no. : {helper.phone} </h2>
         </div>
     );
 };

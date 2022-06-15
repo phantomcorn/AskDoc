@@ -56,8 +56,46 @@ io.on("connection", (socket) => {
 
   {/* Notify helpers that a thread is picked */}
   socket.on("picks a question", (data) => {
-    console.log(data.email + " picked thread " + data.id);
+    console.log(data.helper.email + " picked thread " + data.id);
+    // Tell the asker the helper's info
+    socket.to(data.askerEmail).emit("my question picked", data.helper);
     io.to("helpers room").emit("thread picked", data.id);
   })
+
+  {/* Gives a unique room for an asker */}
+  socket.on("wait", (askerData) => {
+    socket.join(askerData.email);
+    console.log(askerData.email + " has been waiting for help");
+  })
+
+  {/* Room for an asker looking at helper info */}
+  socket.on("look at helper info", (askerData) => {
+    socket.join(askerData.email);
+  })
+
+  {/* Room for a helper looking at asker info */}
+  socket.on("look at asker info", (helperData) => {
+    socket.join(helperData.email);
+  })
+
+  {/* Asker finishes before helper */}
+  socket.on("notify finish to helper", (helper) => {
+    socket.to(helper.email).emit("asker finishes");
+  });
+
+  {/* Asker cancels before helper */}
+  socket.on("notify cancel to helper", (helper) => {
+    socket.to(helper.email).emit("asker cancels");
+  });
+
+  {/* Helper finishes before asker */}
+  socket.on("notify finish to asker", (asker) => {
+    socket.to(asker.email).emit("helper finishes");
+  });
+
+  {/* Helper cancels before asker */}
+  socket.on("notify cancel to asker", (asker) => {
+    socket.to(asker.email).emit("helper cancels");
+  });
 
 });

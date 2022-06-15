@@ -50,7 +50,11 @@ export default function NonComputing() {
             } else {
               {/* Notify the socket for the event "new question posted" */}
               socket.emit("new question posted", res.data);
-              navi('/wait-for-help');
+              navi('/wait-for-help', {
+                state : {
+                  thread : res.data 
+                }
+              });
             }
         });
     }
