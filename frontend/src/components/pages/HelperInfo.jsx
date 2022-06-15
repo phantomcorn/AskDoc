@@ -45,7 +45,7 @@ export default function HelperInfo() {
         {/* Connect this user to the socket */}
         socket = io(domain);
         socket.emit("look at helper info", currentUser);
-    }, []);
+    }, [location]);
 
     useEffect(() => {
         {/* If helper clicks cancel before asker */}

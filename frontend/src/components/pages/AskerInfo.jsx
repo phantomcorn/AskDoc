@@ -39,7 +39,7 @@ export default function AskerInfo() {
         {/* Connect this user to the socket */}
         socket = io(domain);
         socket.emit("look at asker info", currentUser);
-    }, []);
+    }, [location]);
 
     useEffect(() => {
         {/* If asker clicks cancel before helper */}

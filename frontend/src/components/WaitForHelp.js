@@ -18,7 +18,7 @@ export default function WaitForHelp() {
     socket = io(domain);
     {/* Join the room for this question */}
     socket.emit("wait", currentUser);
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     {/* Controller listening for the event "my question picked" */}
