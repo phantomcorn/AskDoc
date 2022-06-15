@@ -19,6 +19,8 @@ const setThread = asyncHandler(async (req, res) => {
     //non-computing student can only ask a question each time
     if (threadAsked === null) {
         const thread = await Thread.create({
+            tag1 : req.body.tag1,
+            tag2 : req.body.tag2,
             title : req.body.title,
             content : req.body.content,
             owner : req.body.owner,
@@ -45,6 +47,8 @@ const putThread = asyncHandler(async (req,res) => {
     }
 
     const newBody = {
+        tag1 : threadToUpdate.tag1,
+        tag2 : threadToUpdate.tag2,
         title : threadToUpdate.title,
         content: threadToUpdate.content,
         owner : threadToUpdate.owner,

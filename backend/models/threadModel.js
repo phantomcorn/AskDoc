@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
     answer - person answering the question (defaults to "")
 */
 const threadSchema = {
+    tag1 : String,
+    tag2 : String,
     title : String,
     content : String,
     owner: String,

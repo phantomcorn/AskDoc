@@ -60,6 +60,7 @@ export default function Computing() {
                         {threads.map((thread) =>{
                             return (
                                 <div key={thread._id}> 
+                                    <h4> #{thread.tag1} #{thread.tag2} </h4> 
                                     <h2> {thread.title} </h2> 
                                     <div> {thread.content} </div>
                                     <button value={thread._id} onClick={handleSubmit} type="submit">Answer this question</button>
