@@ -3,7 +3,7 @@ import map from "../../assets/map.png"
 import axios from "axios";
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Card, Alert } from 'react-bootstrap'
+import { Form, Button, Card } from 'react-bootstrap'
 
 import io from 'socket.io-client';
 
@@ -13,6 +13,8 @@ export default function NonComputing() {
 
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
     const {currentUser} = useAuth();
+    const tag1Ref = useRef();
+    const tag2Ref = useRef();
     const titleRef = useRef();
     const contentRef = useRef();
     const navi = useNavigate();
@@ -23,6 +25,8 @@ export default function NonComputing() {
 
         e.preventDefault();
 
+        let taglan = tag1Ref.current.value;
+        let tagCat = tag2Ref.current.value;
         let summary= titleRef.current.value;
         let detail = contentRef.current.value;
         
@@ -32,6 +36,8 @@ export default function NonComputing() {
         }
 
         const newThread = {
+            tag1 : taglan,
+            tag2 : tagCat,
             title: summary,
             content : detail,
             owner: currentUser.email,
@@ -62,6 +68,31 @@ export default function NonComputing() {
         <>
         <Card>
             <Form onSubmit={handleSave}>
+                <Form.Group id="tag">
+                    <Form.Label> Language </Form.Label>
+                    <select ref={tag1Ref}> 
+                        <option value="General">General</option>
+                        <option value="Python">Python</option>
+                        <option value="C language">C language</option>
+                        <option value="C++ language">C++ language</option>
+                        <option value="Java">Java</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="Scala">Scala</option>
+                        <option value="R">R</option>
+                    </select>
+                    <label>&nbsp;&nbsp;</label>
+                    <Form.Label> Category </Form.Label>
+                    <select ref={tag2Ref}> 
+                        <option value="General">General</option>
+                        <option value="Syntax">Syntax</option>
+                        <option value="Data Structure">Data Structure</option>
+                        <option value="Algorithm">Algorithm</option>
+                        <option value="Frontend">Frontend</option>
+                        <option value="Setup">Setup</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Bugs">Bugs</option>
+                    </select>
+                </Form.Group>
                 <Form.Group id="title">
                     <Form.Label>Enter Message Title</Form.Label>
                     <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
