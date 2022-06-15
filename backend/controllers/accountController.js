@@ -100,7 +100,7 @@ const login = asyncHandler(async (req, res) => {
 
 // })
 
-const updateemail = asyncHandler(async (req, res) => {
+const updateEmail = asyncHandler(async (req, res) => {
     if (!req.body.email) {
         res.status(400).send({message: "A field email is currently missing"})
         throw new Error("A field is currently missing")
@@ -141,7 +141,7 @@ const updateemail = asyncHandler(async (req, res) => {
     }
 })
 
-const updatepassword = asyncHandler(async (req, res) => {
+const updatePassword = asyncHandler(async (req, res) => {
     if (!req.body.email || !req.body.password || !req.body.newpassword) {
         res.status(400).send({message: "A field is currently missing"})
         throw new Error("A field is currently missing")
@@ -166,9 +166,27 @@ const updatepassword = asyncHandler(async (req, res) => {
     }
 })
 
+const getAsker = asyncHandler(async (req, res) => {
+
+    const {email} = req.query;
+
+    if (!email) {
+        res.status(400).send({message: "A field is currently missing"})
+        throw new Error("A field is currently missing")
+    }
+    
+    let user = await Account.findOne({email: email});
+
+    if (user) {
+        res.status(200).send({name : user.name, email: email, password: user.password, computing: user.computing, phone : user.phone})
+    } else {
+        res.status(400).send({message: "User email not registered"})
+    }
+})
+
 
 
 
 module.exports = {
-    signup, login, updateemail, updatepassword //resetpassword
+    signup, login, updateEmail, updatePassword, getAsker //resetpassword
 }

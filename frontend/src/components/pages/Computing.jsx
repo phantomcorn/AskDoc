@@ -2,23 +2,26 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Container, Button, Row, Col, Form } from 'react-bootstrap'
-
 import io from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 var socket;
 
 
 export default function Computing() {
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : "http://localhost:5000"
-    const host = `${domain}/api/threads`;
     const tag1Ref = useRef();
     const tag2Ref = useRef();
+    const threadHost = `${domain}/api/threads`;
+    const accountHost = `${domain}/api/accounts`;
     const [threads, setThreads] = useState([]);
     const {currentUser} = useAuth();
+    const navi = useNavigate
 
     const getThreads = async () => {
-      const updatedThreads = await axios.get(host)
+      const updatedThreads = await axios.get(threadHost)
       setThreads(updatedThreads.data)
     }
 
@@ -30,6 +33,7 @@ export default function Computing() {
         
         getThreads();
     },[])
+    
 
     useEffect(() => {
       {/* Controller listening for the event "new thread" */}
@@ -39,25 +43,27 @@ export default function Computing() {
     })
 
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         const id = e.target.value
         const threadToUpdate = {
-            _id : id,
+            id : id,
             answer : currentUser.email
         }
 
-        axios.put(`${host}/${id}`, threadToUpdate)
+        const updatedThread = await axios.put(`${threadHost}/${id}`, threadToUpdate)
         socket.emit("picks a question", {email: currentUser.email, id: id});
+        const asker = await axios.get(`${accountHost}/answer`, {params : {email : updatedThread.data.owner}}).data
+
     }
 
     function tag1filter(thread) {
-        console.log(tag1Ref.current.value)
+        //console.log(tag1Ref.current.value)
         return tag1Ref.current.value === thread.tag1 || tag1Ref.current.value === "Any"
     }
 
     function tag2filter(thread) {
-        console.log(tag1Ref.current.value)
+        //console.log(tag1Ref.current.value)
         return tag2Ref.current.value === thread.tag2 || tag2Ref.current.value === "Any"
     }
 
@@ -113,58 +119,10 @@ export default function Computing() {
                     </div>
                 </Col>
             </Row>
-        </Container>
-        <div className="w-100 text-center mt-3">
-            <Link to="/"><h2>Cancel</h2></Link>
-        </div>
+            </Container>
+            <div className="w-100 text-center mt-3">
+                <Link to="/"><h2>Cancel</h2></Link>
+            </div>
         </>
     )
 }
-/*
-export default class Computing extends React.Component {
-
-    constructor() {
-        super();
-        this.state = {
-            threads: []
-        }
-    }
-
-    async componentDidMount() {        
-        const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
-        const host = `${domain}/api/threads`;
-        const updatedThread = await axios.get(host);
-        this.setState({threads : updatedThread.data});
-    }
-
-    handleAnswer(id) {
-        console.log(id)
-    }
-
-    render(){
-        return(
-            <div>
-                <Container>
-                    <Row>
-                        <Col>
-                            <h4>
-                                Questions:
-                            </h4>
-                            {this.state.threads.map((thread) =>{
-                                return (
-                                    <div key={thread._id}> 
-                                        <h2> {thread.title} </h2> 
-                                        <div> {thread.content} </div>
-                                        <button type="submit" onClick={this.handleAnswer(thread._id)}>Answer this question</button>
-                                    </div>
-                                )
-                            })}
-                        </Col>
-                    </Row>
-                </Container>
-                    
-            </div>
-        )
-    }
-}
-*/
