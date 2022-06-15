@@ -178,7 +178,7 @@ const getAsker = asyncHandler(async (req, res) => {
     let user = await Account.findOne({email: email});
 
     if (user) {
-        res.status(200).send({name : user.name, email: email, password: user.password, computing: user.computing, phone : user.phone})
+        res.status(200).send({name : user.name, email: email, phone : user.phone})
     } else {
         res.status(400).send({message: "User email not registered"})
     }

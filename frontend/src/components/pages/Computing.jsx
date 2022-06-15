@@ -18,7 +18,7 @@ export default function Computing() {
     const accountHost = `${domain}/api/accounts`;
     const [threads, setThreads] = useState([]);
     const {currentUser} = useAuth();
-    const navi = useNavigate
+    const navi = useNavigate()
 
     const getThreads = async () => {
       const updatedThreads = await axios.get(threadHost)
@@ -53,8 +53,8 @@ export default function Computing() {
 
         const updatedThread = await axios.put(`${threadHost}/${id}`, threadToUpdate)
         socket.emit("picks a question", {email: currentUser.email, id: id});
-        const asker = await axios.get(`${accountHost}/answer`, {params : {email : updatedThread.data.owner}}).data
-
+        const asker = await axios.get(`${accountHost}/answer`, {params : {email : updatedThread.data.owner}})
+        navi("/asker-info", {state : {asker : asker.data}})
     }
 
     function tag1filter(thread) {
@@ -105,7 +105,7 @@ export default function Computing() {
                         <option value="Hardware">Hardware</option>
                         <option value="Bugs">Bugs</option>
                     </select>
-                    <div class='QuestionsList'>
+                    <div className='QuestionsList'>
                     {threads.filter(tag1filter).filter(tag2filter).map((thread) =>{
                         return (
                             <div key={thread._id} className="mb-3"> 
