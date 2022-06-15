@@ -41,3 +41,10 @@
   height: 200px;
   width: 200px;
 }
+
+div.QuestionsList {
+  background-color: lightblue;
+  width: 400px;
+  height: 350px;
+  overflow: auto;
+}

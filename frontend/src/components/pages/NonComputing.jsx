@@ -31,7 +31,7 @@ export default function NonComputing() {
         let detail = contentRef.current.value;
         
         if (detail === "" || summary=== "") {
-            alert("You are forgot to fill in a field");
+            alert("You forgot to fill in a field");
             return
         }
 
