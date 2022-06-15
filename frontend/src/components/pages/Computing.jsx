@@ -17,16 +17,16 @@ export default function Computing() {
     const [threads, setThreads] = useState([]);
     const {currentUser} = useAuth();
 
+    const getThreads = async () => {
+      const updatedThreads = await axios.get(host)
+      setThreads(updatedThreads.data)
+    }
+
     useEffect(() => {
         {/* Connect this user to the socket */}
         socket = io(domain);
         {/* Send signal to the socket that this user is observing threads db */}
         socket.emit("observe threads db", currentUser);
-
-        const getThreads = async () => {
-          const updatedThreads = await axios.get(host)
-          setThreads(updatedThreads.data)
-        }
         
         getThreads();
     },[])
@@ -36,16 +36,22 @@ export default function Computing() {
       socket.on("new thread", (newThread) => setThreads([...threads, newThread]))
     })
 
+    useEffect(() => {
+      {/* Controller listening for the event "thread picked" */}
+      socket.on("thread picked", (id) => setThreads((prevThreads) => prevThreads.filter(thread => thread._id != id)));
+    })
+
 
     function handleSubmit(e) {
         e.preventDefault()
         const id = e.target.value
         const threadToUpdate = {
-            id : id,
+            _id : id,
             answer : currentUser.email
         }
 
         axios.put(`${host}/${id}`, threadToUpdate)
+        socket.emit("picks a question", {email: currentUser.email, id: id});
     }
 
     return(

@@ -4,9 +4,11 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function Signup() {
+  const nameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
+  const phoneRef = useRef()
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -20,10 +22,18 @@ export default function Signup() {
           return setError('Passwords do not match')
       }
 
+      const newAcc = {
+        name : nameRef.current.value,
+        email : emailRef.current.value,
+        password : passwordRef.current.value,
+        computing : computingAcc,
+        phone : phoneRef.current.value
+      }
+
       try {
           setError("")
           setLoading(true)
-          await signup(emailRef.current.value, passwordRef.current.value, computingAcc)
+          await signup(newAcc)
           navi("/")
       } catch(err) {
           setError('Failed to create an account: ' + err.message)
@@ -45,6 +55,10 @@ export default function Signup() {
             <h2 className="text-center mb-4"> Sign Up </h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}> 
+                <Form.Group id="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="name" ref={nameRef} required />
+                </Form.Group>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" ref={emailRef} required />
@@ -56,6 +70,10 @@ export default function Signup() {
                 <Form.Group id="password-confirm">
                     <Form.Label>Password Confirmation</Form.Label>
                     <Form.Control type="password" ref={passwordConfirmRef} required />
+                </Form.Group>
+                <Form.Group id="phone">
+                    <Form.Label>Phone no.</Form.Label>
+                    <Form.Control type="phone" ref={phoneRef} required />
                 </Form.Group>
                 <Form.Group>
                     <Form.Check type="radio" checked={computingAcc} onChange={handleAccType} label="Computing"/>
