@@ -54,4 +54,10 @@ io.on("connection", (socket) => {
     socket.to("helpers room").emit("new thread", newThread);
   })
 
+  {/* Notify helpers that a thread is picked */}
+  socket.on("picks a question", (data) => {
+    console.log(data.email + " picked thread " + data.id);
+    socket.to("helpers room").emit("thread picked", data.id);
+  })
+
 });
