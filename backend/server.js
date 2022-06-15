@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
     console.log(data.helper.email + " picked thread " + data.id);
     // Tell the asker the helper's info
     socket.to(data.askerEmail).emit("my question picked", data.helper);
-    io.to("helpers room").emit("thread picked", data.id);
+    socket.to("helpers room").emit("thread picked", data.id);
   })
 
   {/* Gives a unique room for an asker */}
