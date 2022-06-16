@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Button, Row, Col, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import io from 'socket.io-client';
 import { useAuth } from '../../contexts/AuthContext';
+import "../../css/Computing.css"
 
 var socket;
 
@@ -77,14 +78,11 @@ export default function Computing() {
     }
 
     return(
-        <>
-        <Container>
-            <Row>
-                <Col>
-                    <h4>
-                        Questions:
-                    </h4>
-                    <h5>Filter by:</h5>
+        <div class="computing">
+            <h2>
+                Questions:
+            </h2>
+                <div class="language-filter">
                     <Form.Label> Language <label>&nbsp;&nbsp;</label> </Form.Label>
                     <select ref={tag1Ref} onChange={handleChange}> 
                         <option value="Any">Any</option>
@@ -97,7 +95,9 @@ export default function Computing() {
                         <option value="Scala">Scala</option>
                         <option value="R">R</option>
                     </select>
-                    <br></br>
+                </div>
+            <br></br>
+                <div class="category-filter">
                     <Form.Label> Category <label>&nbsp;&nbsp;</label> </Form.Label>
                     <select ref={tag2Ref} onChange={handleChange}>
                         <option value="Any">Any</option> 
@@ -110,24 +110,22 @@ export default function Computing() {
                         <option value="Hardware">Hardware</option>
                         <option value="Bugs">Bugs</option>
                     </select>
-                    <div className='QuestionsList'>
-                    {threads.filter(tag1filter).filter(tag2filter).map((thread) =>{
-                        return (
-                            <div key={thread._id} className="mb-3"> 
-                                <h4> #{thread.tag1} #{thread.tag2} </h4> 
-                                <h2> {thread.title} </h2> 
-                                <div> {thread.content} </div>
-                                <Button value={thread._id} onClick={handleSubmit} type="submit">Answer this question</Button>
-                            </div>
-                        )
-                    })}
+                </div>
+            <div className='QuestionsList'>
+            {threads.filter(tag1filter).filter(tag2filter).map((thread) =>{
+                return (
+                    <div key={thread._id} className="mb-3" class="question"> 
+                        <h6 class="tags">  #{thread.tag1} #{thread.tag2} </h6> 
+                        <h4 class="title">  {thread.title} </h4> 
+                        <div class="content">  {thread.content} </div>
+                        <button value={thread._id} onClick={handleSubmit} type="submit" class="answer">Answer this question</button>
                     </div>
-                </Col>
-            </Row>
-            </Container>
+                )
+            })}
+            </div>
             <div className="w-100 text-center mt-3">
                 <Link to="/"><h2>Cancel</h2></Link>
             </div>
-        </>
+        </div>
     )
 }

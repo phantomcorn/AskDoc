@@ -1,15 +1,9 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
-
-interface askerInfo {
-    name : String, 
-    email: String, 
-    phone : String
-};
-
+import "../../css/AskerInfo.css";
 var socket;
 
 export default function AskerInfo() {
@@ -63,24 +57,31 @@ export default function AskerInfo() {
 
 
     return (
-        <div>
-            <div className="w-100 text-center mt-3">
-                <h1>Asker's Information</h1>
-            </div>
+        <div class="asker-info-body">
+            
             {/* <div className="w-100 text-center mt-3">
                 <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
             </div> */}
-            <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
-            </div>
-            <h2> Name : {asker.name} </h2>
-            <h2> Email : {asker.email} </h2>
-            <h2> Phone no. : {asker.phone} </h2>
-            <h2> Question : </h2>
-            <div className="QuestionsList mb-3"> 
+            
+            <div className="QuestionsList mb-3" class="question"> 
+                <h2> Question : </h2>
                 <h4> #{thread.tag1} #{thread.tag2} </h4> 
                 <h2> {thread.title} </h2> 
                 <div> {thread.content} </div>
+            </div>
+
+            <div class="asker-info"> 
+                <div className="w-100 text-center mt-3">
+                    <h1>Asker's Information</h1>
+                </div>
+                <h2> Name : {asker.name} </h2>
+                <h2> Email : {asker.email} </h2>
+                <h2> Phone no. : {asker.phone} </h2>
+            </div>
+            
+            
+            <div className="w-100 text-center mt-3" class="finish">
+                <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
             </div>
         </div>
     );

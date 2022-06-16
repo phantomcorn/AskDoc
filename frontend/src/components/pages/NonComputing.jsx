@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card } from 'react-bootstrap'
+import "../../css/NonComputing.css"
 
 import io from 'socket.io-client';
 
@@ -69,50 +70,50 @@ export default function NonComputing() {
     }
 
     return (
-        <>
-        <Card>
-            <Form onSubmit={handleSave}>
-                <Form.Group id="tag">
-                    <Form.Label> Language </Form.Label>
-                    <select ref={tag1Ref}> 
-                        <option value="General">General</option>
-                        <option value="Python">Python</option>
-                        <option value="C language">C language</option>
-                        <option value="C++ language">C++ language</option>
-                        <option value="Java">Java</option>
-                        <option value="Kotlin">Kotlin</option>
-                        <option value="Scala">Scala</option>
-                        <option value="R">R</option>
-                    </select>
-                    <label>&nbsp;&nbsp;</label>
-                    <Form.Label> Category </Form.Label>
-                    <select ref={tag2Ref}> 
-                        <option value="General">General</option>
-                        <option value="Syntax">Syntax</option>
-                        <option value="Data Structure">Data Structure</option>
-                        <option value="Algorithm">Algorithm</option>
-                        <option value="Frontend">Frontend</option>
-                        <option value="Setup">Setup</option>
-                        <option value="Hardware">Hardware</option>
-                        <option value="Bugs">Bugs</option>
-                    </select>
-                </Form.Group>
-                <Form.Group id="title">
-                    <Form.Label>Enter Message Title</Form.Label>
-                    <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
-                </Form.Group>
-                <Form.Group id="desc">
-                    <Form.Label>Enter Problem</Form.Label>
-                    <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
-                </Form.Group>
-                <Button className="w-100 mt-3" type="submit">
-                    Post a question
-                </Button>
-            </Form>
-        </Card>
-        <div className="w-100  text-center mt-3">
-            <Link to="/"><h2>Cancel</h2></Link>
+        <div class="non-computing">
+            <Card>
+                <Form onSubmit={handleSave}>
+                    <Form.Group id="tag">
+                        <Form.Label> Language </Form.Label>
+                        <select ref={tag1Ref}> 
+                            <option value="General">General</option>
+                            <option value="Python">Python</option>
+                            <option value="C language">C language</option>
+                            <option value="C++ language">C++ language</option>
+                            <option value="Java">Java</option>
+                            <option value="Kotlin">Kotlin</option>
+                            <option value="Scala">Scala</option>
+                            <option value="R">R</option>
+                        </select>
+                        <label>&nbsp;&nbsp;</label>
+                        <Form.Label> Category </Form.Label>
+                        <select ref={tag2Ref}> 
+                            <option value="General">General</option>
+                            <option value="Syntax">Syntax</option>
+                            <option value="Data Structure">Data Structure</option>
+                            <option value="Algorithm">Algorithm</option>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Setup">Setup</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="Bugs">Bugs</option>
+                        </select>
+                    </Form.Group>
+                    <Form.Group id="title">
+                        <Form.Label>Enter Message Title</Form.Label>
+                        <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
+                    </Form.Group>
+                    <Form.Group id="desc">
+                        <Form.Label>Enter Problem</Form.Label>
+                        <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
+                    </Form.Group>
+                    <Button className="w-100 mt-3" type="submit">
+                        Post a question
+                    </Button>
+                </Form>
+            </Card>
+            <div className="w-100  text-center mt-3">
+                <Link to="/"><h2>Cancel</h2></Link>
+            </div>
         </div>
-        </>
     );
 }

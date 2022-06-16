@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Card, Button, Alert} from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import "../css/Dashboard.css"
 import Computing from "./pages/Computing";
 import NonComputing from "./pages/NonComputing";
 
@@ -22,7 +23,7 @@ export default function Dashboard() {
   }
 
   return ( currentUser.computing?
-      <>
+      <div class="dashboard">
         <Card>
           <Card.Body>
               <h2 className="text-center mb-4">Profile</h2>
@@ -42,9 +43,9 @@ export default function Dashboard() {
               Log Out
             </Button>
         </div>
-      </>
+      </div>
       :
-      <>
+      <div class="dashboard">
 
         <Card>
           <Card.Body>
@@ -65,7 +66,6 @@ export default function Dashboard() {
               Log Out
             </Button>
         </div>
-        <></>
-      </>
+      </div>
   )
 }

@@ -1,0 +1,9 @@
+div.update-profile {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 30%;
+    height : 50%;
+    justify-content: center;
+  }
+  

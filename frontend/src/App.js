@@ -17,9 +17,8 @@ import {AuthProvider} from "./contexts/AuthContext"
 
 function App() {
   return (
-    <Container className="d-flex align-items-center justify-content-center"
-              style={{minHeight: "100vh"}}>
-      <div className="w-100" style={{ maxWidth: '400px'}}>
+    <Container className="background">
+      <div className="main-body">
         <h2>
             AskDoC
         </h2>
