@@ -22,19 +22,19 @@ export default function HelperInfo() {
     const navi = useNavigate();
     const {currentUser} = useAuth();
     
-    const handleCancel = async e => {
-        e.preventDefault()
-        const res = await axios.put(`${threadHost}/return/${thread._id}`)
-        socket.emit("notify cancel to helper", helper);
+    // const handleCancel = async e => {
+    //     e.preventDefault()
+    //     const res = await axios.put(`${threadHost}/return/${thread._id}`)
+    //     socket.emit("notify cancel to helper", helper);
 
-        {/* Notify the socket for the event "new question posted" */}
-        socket.emit("new question posted", res.data);
-        navi('/wait-for-help', {
-          state : {
-            thread : thread
-          }
-        })
-    }
+    //     {/* Notify the socket for the event "new question posted" */}
+    //     socket.emit("new question posted", res.data);
+    //     navi('/wait-for-help', {
+    //       state : {
+    //         thread : thread
+    //       }
+    //     })
+    // }
 
     const handleRemove = async () => {
         await axios.delete(`${threadHost}/${thread._id}`);
@@ -48,13 +48,13 @@ export default function HelperInfo() {
     }, [location]);
 
     useEffect(() => {
-        {/* If helper clicks cancel before asker */}
-        socket.on("helper cancels", () => navi('/wait-for-help', {
-          state : {
-            message : "Helper cancels your question",
-            thread : thread
-          }
-        }));
+        // {/* If helper clicks cancel before asker */}
+        // socket.on("helper cancels", () => navi('/wait-for-help', {
+        //   state : {
+        //     message : "Helper cancels your question",
+        //     thread : thread
+        //   }
+        // }));
         {/* If helper clicks finish before asker */}
         socket.on("helper finishes", () => navi('/', {
           state : {
@@ -67,8 +67,11 @@ export default function HelperInfo() {
     return (
         <div>
             <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
+                <h1>Helper's Information</h1>
             </div>
+            {/* <div className="w-100 text-center mt-3">
+                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
+            </div> */}
             <div className="w-100 text-center mt-3">
                 <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
             </div>

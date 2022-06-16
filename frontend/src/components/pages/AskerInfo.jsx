@@ -22,13 +22,13 @@ export default function AskerInfo() {
     const {currentUser} = useAuth();
     const navi = useNavigate();
     
-    const handleCancel = async () => {
-        const res = await axios.put(`${threadHost}/return/${thread._id}`)
-        socket.emit("notify cancel to asker", asker);
+    // const handleCancel = async () => {
+    //     const res = await axios.put(`${threadHost}/return/${thread._id}`)
+    //     socket.emit("notify cancel to asker", asker);
 
-        {/* Notify the socket for the event "new question posted" */}
-        socket.emit("new question posted", res.data);
-    }
+    //     {/* Notify the socket for the event "new question posted" */}
+    //     socket.emit("new question posted", res.data);
+    // }
 
     const handleRemove = async () => {
         await axios.delete(`${threadHost}/${thread._id}`);
@@ -42,13 +42,13 @@ export default function AskerInfo() {
     }, [location]);
 
     useEffect(() => {
-        {/* If asker clicks cancel before helper */}
-        socket.on("asker cancels", () => navi('/', {
-          state : {
-            message : "Asker cancels your help",
-            thread : thread
-          }
-        }));
+        // {/* If asker clicks cancel before helper */}
+        // socket.on("asker cancels", () => navi('/', {
+        //   state : {
+        //     message : "Asker cancels your help",
+        //     thread : thread
+        //   }
+        // }));
         {/* If asker clicks finish before helper */}
         socket.on("asker finishes", () => navi('/', {
           state : {
@@ -61,8 +61,11 @@ export default function AskerInfo() {
     return (
         <div>
             <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
+                <h1>Asker's Information</h1>
             </div>
+            {/* <div className="w-100 text-center mt-3">
+                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
+            </div> */}
             <div className="w-100 text-center mt-3">
                 <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
             </div>
