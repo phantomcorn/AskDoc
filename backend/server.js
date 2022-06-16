@@ -68,34 +68,39 @@ io.on("connection", (socket) => {
     console.log(askerData.email + " has been waiting for help");
   })
 
-  {/* Room for an asker looking at helper info */}
-  socket.on("look at helper info", (askerData) => {
-    socket.join(askerData.email);
+  {/* Notify helpers in "helpers room" that the asker cancels the question */}
+  socket.on("cancel question", (data) => {
+    io.to("helpers room").emit("thread picked", data.id);
   })
 
-  {/* Room for a helper looking at asker info */}
-  socket.on("look at asker info", (helperData) => {
-    socket.join(helperData.email);
-  })
+  // {/* Room for an asker looking at helper info */}
+  // socket.on("look at helper info", (askerData) => {
+  //   socket.join(askerData.email);
+  // })
 
-  {/* Asker finishes before helper */}
-  socket.on("notify finish to helper", (helper) => {
-    socket.to(helper.email).emit("asker finishes");
-  });
+  // {/* Room for a helper looking at asker info */}
+  // socket.on("look at asker info", (helperData) => {
+  //   socket.join(helperData.email);
+  // })
 
-  {/* Asker cancels before helper */}
-  socket.on("notify cancel to helper", (helper) => {
-    socket.to(helper.email).emit("asker cancels");
-  });
+  // {/* Asker finishes before helper */}
+  // socket.on("notify finish to helper", (helper) => {
+  //   socket.to(helper.email).emit("asker finishes");
+  // });
 
-  {/* Helper finishes before asker */}
-  socket.on("notify finish to asker", (asker) => {
-    socket.to(asker.email).emit("helper finishes");
-  });
+  // {/* Asker cancels before helper */}
+  // socket.on("notify cancel to helper", (helper) => {
+  //   socket.to(helper.email).emit("asker cancels");
+  // });
 
-  {/* Helper cancels before asker */}
-  socket.on("notify cancel to asker", (asker) => {
-    socket.to(asker.email).emit("helper cancels");
-  });
+  // {/* Helper finishes before asker */}
+  // socket.on("notify finish to asker", (asker) => {
+  //   socket.to(asker.email).emit("helper finishes");
+  // });
+
+  // {/* Helper cancels before asker */}
+  // socket.on("notify cancel to asker", (asker) => {
+  //   socket.to(asker.email).emit("helper cancels");
+  // });
 
 });
