@@ -37,31 +37,35 @@ export default function HelperInfo() {
     // }
 
     const handleRemove = async () => {
-        await axios.delete(`${threadHost}/${thread._id}`);
-        socket.emit("notify finish to helper", helper);
+        await axios.delete(`${threadHost}/${thread._id}`).catch(
+          (err) => {
+            console.log("The question has already been removed from the db");
+          }
+        );
+        // socket.emit("notify finish to helper", helper);
     }
 
-    useEffect(() => {
-        {/* Connect this user to the socket */}
-        socket = io(domain);
-        socket.emit("look at helper info", currentUser);
-    }, [location]);
+    // useEffect(() => {
+    //     {/* Connect this user to the socket */}
+    //     socket = io(domain);
+    //     socket.emit("look at helper info", currentUser);
+    // }, [location]);
 
-    useEffect(() => {
-        // {/* If helper clicks cancel before asker */}
-        // socket.on("helper cancels", () => navi('/wait-for-help', {
-        //   state : {
-        //     message : "Helper cancels your question",
-        //     thread : thread
-        //   }
-        // }));
-        {/* If helper clicks finish before asker */}
-        socket.on("helper finishes", () => navi('/', {
-          state : {
-            message : "The helper finishes answering your question. Thank for asking :)",
-          }
-        }));
-    })
+    // useEffect(() => {
+    //     // {/* If helper clicks cancel before asker */}
+    //     // socket.on("helper cancels", () => navi('/wait-for-help', {
+    //     //   state : {
+    //     //     message : "Helper cancels your question",
+    //     //     thread : thread
+    //     //   }
+    //     // }));
+    //     {/* If helper clicks finish before asker */}
+    //     socket.on("helper finishes", () => navi('/', {
+    //       state : {
+    //         message : "The helper finishes answering your question. Thank for asking :)",
+    //       }
+    //     }));
+    // })
 
 
     return (

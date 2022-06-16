@@ -31,31 +31,35 @@ export default function AskerInfo() {
     // }
 
     const handleRemove = async () => {
-        await axios.delete(`${threadHost}/${thread._id}`);
-        socket.emit("notify finish to asker", asker);
+        await axios.delete(`${threadHost}/${thread._id}`).catch(
+          (err) => {
+            console.log("The question has already been removed from the db");
+          }
+        )
+        // socket.emit("notify finish to asker", asker);
     }
 
-    useEffect(() => {
-        {/* Connect this user to the socket */}
-        socket = io(domain);
-        socket.emit("look at asker info", currentUser);
-    }, [location]);
+    // useEffect(() => {
+    //     {/* Connect this user to the socket */}
+    //     socket = io(domain);
+    //     socket.emit("look at asker info", currentUser);
+    // }, [location]);
 
-    useEffect(() => {
-        // {/* If asker clicks cancel before helper */}
-        // socket.on("asker cancels", () => navi('/', {
-        //   state : {
-        //     message : "Asker cancels your help",
-        //     thread : thread
-        //   }
-        // }));
-        {/* If asker clicks finish before helper */}
-        socket.on("asker finishes", () => navi('/', {
-          state : {
-            message : "The asker finishes the session. Thank for helping :)",
-          }
-        }));
-    })
+    // useEffect(() => {
+    //     // {/* If asker clicks cancel before helper */}
+    //     // socket.on("asker cancels", () => navi('/', {
+    //     //   state : {
+    //     //     message : "Asker cancels your help",
+    //     //     thread : thread
+    //     //   }
+    //     // }));
+    //     {/* If asker clicks finish before helper */}
+    //     socket.on("asker finishes", () => navi('/', {
+    //       state : {
+    //         message : "The asker finishes the session. Thank for helping :)",
+    //       }
+    //     }));
+    // })
 
 
     return (
@@ -72,6 +76,12 @@ export default function AskerInfo() {
             <h2> Name : {asker.name} </h2>
             <h2> Email : {asker.email} </h2>
             <h2> Phone no. : {asker.phone} </h2>
+            <h2> Question : </h2>
+            <div className="QuestionsList mb-3"> 
+                <h4> #{thread.tag1} #{thread.tag2} </h4> 
+                <h2> {thread.title} </h2> 
+                <div> {thread.content} </div>
+            </div>
         </div>
     );
 };
