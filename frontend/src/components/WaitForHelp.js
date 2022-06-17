@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Button } from 'react-bootstrap'
+import sandclock from "../assets/sandclock.png"
+import "../css/WaitForHelp.css"
 
 import io from 'socket.io-client';
 import { useAuth } from "../contexts/AuthContext";
@@ -50,6 +52,7 @@ export default function WaitForHelp() {
       <h1>Your question has been submitted. Please wait...</h1>
       :
       <h1>The helper cancels your question. Please wait for another helper...</h1> }
+      <img src={sandclock} alt="Sandclock" className='center sandclock'></img>
       <Button onClick={handleCancel} type="submit">Cancel</Button>
     </>
   );
