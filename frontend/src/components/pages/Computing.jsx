@@ -37,9 +37,15 @@ export default function Computing() {
 
     useEffect(() => {
       {/* Controller listening for the event "new thread" */}
-      socket.on("new thread", (newThread) => setThreads([...threads, newThread]));
+      socket.on("new thread", (newThread) => {
+        const allThreads = [...threads, newThread];
+        setThreads(allThreads);
+      });
       {/* Controller listening for the event "thread picked" */}
-      socket.on("thread picked", (id) => setThreads((prevThreads) => prevThreads.filter(thread => thread._id != id)));
+      socket.on("thread picked", (id) => {
+        const allThreads = threads.filter(thread => thread._id != id);
+        setThreads(allThreads);
+      });
     })
 
 

@@ -24,7 +24,9 @@ const setThread = asyncHandler(async (req, res) => {
             title : req.body.title,
             content : req.body.content,
             owner : req.body.owner,
-            answer : ""
+            answer : "",
+            lat : req.body.lat,
+            lng : req.body.lng
         })
     
         res.status(200).json(thread)
@@ -52,7 +54,9 @@ const putThread = asyncHandler(async (req,res) => {
         title : threadToUpdate.title,
         content: threadToUpdate.content,
         owner : threadToUpdate.owner,
-        answer : req.body.answer
+        answer : req.body.answer,
+        lat : threadToUpdate.lat,
+        lng : threadToUpdate.lng
     }
 
     //update value of new thread
@@ -98,7 +102,9 @@ const returnThread = asyncHandler(async (req,res) => {
         title : threadToUpdate.title,
         content: threadToUpdate.content,
         owner : threadToUpdate.owner,
-        answer : ""
+        answer : "",
+        lat : threadToUpdate.lat,
+        lng : threadToUpdate.lng
     }
 
     //update value of new thread

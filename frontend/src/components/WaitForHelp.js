@@ -21,12 +21,12 @@ export default function WaitForHelp() {
 
   async function handleCancel(e) {
     e.preventDefault()
+    socket.emit("cancel question", { id : thread._id });
     await axios.delete(`${threadHost}/${thread._id}`).catch(
       (err) => {
         console.log("The question has already been removed from the db");
       }
     );
-    socket.emit("cancel question", { id : thread._id });
     navi("/");
   }
 

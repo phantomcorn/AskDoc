@@ -12,7 +12,9 @@ const threadSchema = {
     title : String,
     content : String,
     owner: String,
-    answer : String
+    answer : String,
+    lat : Number,
+    lng : Number
 }
 
 //REST API on ThreadsDB.threads
