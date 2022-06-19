@@ -47,13 +47,13 @@ export default function WaitForHelp() {
   });
 
   return (
-    <>
-    { typeof(location.state.message) === 'undefined' ? 
-      <h1>Your question has been submitted. Please wait...</h1>
-      :
-      <h1>The helper cancels your question. Please wait for another helper...</h1> }
-      <img src={sandclock} alt="Sandclock" className='center sandclock'></img>
-      <Button onClick={handleCancel} type="submit">Cancel</Button>
-    </>
+    <div class="wait-for-help-body">
+      { typeof(location.state.message) === 'undefined' ? 
+        <h1>Your question has been submitted. Please wait...</h1>
+        :
+        <h1>The helper cancels your question. Please wait for another helper...</h1> }
+        <img src={sandclock} alt="Sandclock" className='center sandclock'></img>
+        <Button onClick={handleCancel} type="submit">Cancel</Button>
+    </div>
   );
 }

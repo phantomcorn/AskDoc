@@ -148,17 +148,19 @@ export default function NonComputing() {
                         <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
                     </Form.Group>
                     <Form.Label>Pin your location</Form.Label>
-                    <GoogleMap 
-                        mapContainerStyle={mapContainerStyle} 
-                        zoom={17}
-                        center={center}
-                        options={options}
-                        onClick={onMapClick}
-                    >
-                      { marker !== null &&
-                        <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
-                      }
-                    </GoogleMap>
+                    <div class="google-map">
+                        <GoogleMap 
+                            mapContainerStyle={mapContainerStyle} 
+                            zoom={17}
+                            center={center}
+                            options={options}
+                            onClick={onMapClick}
+                        >
+                          { marker !== null &&
+                            <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
+                          }
+                        </GoogleMap>
+                    </div>
                     <Button className="w-100 mt-3" type="submit">
                         Post a question
                     </Button>
