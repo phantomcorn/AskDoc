@@ -4,7 +4,24 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
 import "../../css/AskerInfo.css";
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 var socket;
+
+const mapContainerStyle = {
+  width: "40vw",
+  height: "40vh",
+};
+
+{/* William Penney Laboratory, South Kensington (Middle of Imperial College London) */}
+const center = {
+  lat: 51.498929,
+  lng: -0.176601,
+};
+
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
 export default function AskerInfo() {
 
@@ -15,6 +32,14 @@ export default function AskerInfo() {
     const thread = location.state.thread
     const {currentUser} = useAuth();
     const navi = useNavigate();
+
+    const { isLoaded, loadError } = useLoadScript({
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+      // googleMapsApiKey: undefined,
+    });
+    
+    if (loadError) return "Error loading map";
+    if (!isLoaded) return "Loading map...";
     
     // const handleCancel = async () => {
     //     const res = await axios.put(`${threadHost}/return/${thread._id}`)
@@ -77,6 +102,26 @@ export default function AskerInfo() {
                 <h2> Name : {asker.name} </h2>
                 <h2> Email : {asker.email} </h2>
                 <h2> Phone no. : {asker.phone} </h2>
+                <div className="w-100 text-center mt-3">
+                    <h2>Asker's Location</h2>
+                </div>
+                <GoogleMap 
+                    mapContainerStyle={mapContainerStyle} 
+                    zoom={17}
+                    center={center}
+                    options={options}
+                >
+                    {/* Helper's location */}
+                    <Marker 
+                      position={{ lat: location.state.helperLat, lng: location.state.helperLng }}
+                      icon={{
+                        url: "/you-are-here.png",
+                        scaledSize: new window.google.maps.Size(20, 20)
+                      }}
+                    />
+                    {/* Asker's location */}
+                    <Marker position={{ lat: thread.lat, lng: thread.lng }} />
+                </GoogleMap>
             </div>
             
             

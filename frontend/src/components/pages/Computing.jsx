@@ -77,7 +77,7 @@ export default function Computing() {
         const helper = await axios.get(`${accountHost}/answer`, {params : {email : currentUser.email}});
         socket.emit("picks a question", {helper: helper.data, id: id, askerEmail: updatedThread.data.owner});
         const asker = await axios.get(`${accountHost}/answer`, {params : {email : updatedThread.data.owner}})
-        navi("/asker-info", {
+        navi("/pin-location", {
             state : {
                 asker : asker.data,
                 thread : updatedThread.data
