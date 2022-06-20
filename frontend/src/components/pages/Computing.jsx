@@ -5,9 +5,25 @@ import { Button, Form } from 'react-bootstrap'
 import io from 'socket.io-client';
 import { useAuth } from '../../contexts/AuthContext';
 import "../../css/Computing.css"
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 var socket;
 
+const mapContainerStyle = {
+  width: "30vw",
+  height: "30vh",
+};
+
+{/* William Penney Laboratory, South Kensington (Middle of Imperial College London) */}
+const center = {
+  lat: 51.498929,
+  lng: -0.176601,
+};
+
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
 export default function Computing() {
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : "http://localhost:5000"
@@ -31,6 +47,7 @@ export default function Computing() {
         {/* Send signal to the socket that this user is observing threads db */}
         socket.emit("observe threads db", currentUser);
         
+        
         getThreads();
     },[])
     
@@ -47,7 +64,6 @@ export default function Computing() {
         setThreads(allThreads);
       });
     })
-
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -81,6 +97,30 @@ export default function Computing() {
 
     const handleChange = e => {
         getThreads()
+    }
+
+    const { isLoaded, loadError } = useLoadScript({
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+      // googleMapsApiKey: undefined,
+    });
+
+    if (loadError) return "Error loading map";
+    if (!isLoaded) return "Loading map...";
+
+    function Map(props) {
+      return (
+        <>
+        <h6>Asker's location</h6>
+        <GoogleMap 
+          mapContainerStyle={mapContainerStyle} 
+          zoom={16}
+          center={center}
+          options={options}
+        >
+            <Marker position={{ lat: props.lat, lng: props.lng }}/> 
+        </GoogleMap>
+        </>
+      )
     }
 
     return(
@@ -124,6 +164,7 @@ export default function Computing() {
                         <h6 class="tags">  #{thread.tag1} #{thread.tag2} </h6> 
                         <h4 class="title">  {thread.title} </h4> 
                         <div class="content">  {thread.content} </div>
+                        <Map lat={thread.lat} lng={thread.lng} />
                         <button value={thread._id} onClick={handleSubmit} type="submit" class="answer">Answer this question</button>
                     </div>
                 )
