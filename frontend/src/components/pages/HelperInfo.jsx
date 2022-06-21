@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 interface askerInfo {
     name : String, 
@@ -11,6 +12,22 @@ interface askerInfo {
 };
 
 var socket;
+
+const mapContainerStyle = {
+  width: "30vw",
+  height: "30vh",
+};
+
+{/* William Penney Laboratory, South Kensington (Middle of Imperial College London) */}
+const center = {
+  lat: 51.498929,
+  lng: -0.176601,
+};
+
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
 export default function HelperInfo() {
 
@@ -44,6 +61,14 @@ export default function HelperInfo() {
         );
         // socket.emit("notify finish to helper", helper);
     }
+
+    const { isLoaded, loadError } = useLoadScript({
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+      // googleMapsApiKey: undefined,
+    });
+
+    if (loadError) return "Error loading map";
+    if (!isLoaded) return "Loading map...";
 
     // useEffect(() => {
     //     {/* Connect this user to the socket */}
@@ -82,6 +107,24 @@ export default function HelperInfo() {
             <h2> Name : {helper.name} </h2>
             <h2> Email : {helper.email} </h2>
             <h2> Phone no. : {helper.phone} </h2>
+            <h2>Helper's Location</h2>
+            <GoogleMap 
+                mapContainerStyle={mapContainerStyle} 
+                zoom={17}
+                center={center}
+                options={options}
+            >
+                {/* Asker's location */}
+                <Marker 
+                  position={{ lat: thread.lat, lng: thread.lng }}
+                  icon={{
+                    url: "/you-are-here.png",
+                    scaledSize: new window.google.maps.Size(20, 20)
+                  }}
+                />
+                {/* Helper's location */}
+                <Marker position={{ lat: location.state.helperLat, lng: location.state.helperLng }} />
+            </GoogleMap>
         </div>
     );
 };

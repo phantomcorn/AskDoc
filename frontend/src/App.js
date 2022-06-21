@@ -12,6 +12,7 @@ import WaitForHelp from './components/WaitForHelp';
 import AskerInfo from './components/pages/AskerInfo';
 import HelperInfo from './components/pages/HelperInfo';
 import PinLocation from './components/PinLocation';
+import WaitForLocation from './components/WaitForLocation';
 import { BrowserRouter as Router,Route,Routes,Link } from "react-router-dom";
 import {Container} from 'react-bootstrap'
 import {AuthProvider} from "./contexts/AuthContext"
@@ -39,6 +40,11 @@ function App() {
                 <Route path="/wait-for-help" element={
                   <PrivateRoute>
                     <WaitForHelp />
+                  </PrivateRoute>
+                } />
+                <Route path="/wait-for-location" element={
+                  <PrivateRoute>
+                    <WaitForLocation />
                   </PrivateRoute>
                 } />
                 <Route path="/ask" element={

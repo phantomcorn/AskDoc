@@ -73,6 +73,19 @@ io.on("connection", (socket) => {
     io.to("helpers room").emit("thread picked", data.id);
   })
 
+  {/* Gives a room for asker waiting for helper's location */}
+  socket.on("wait for location", (askerData) => {
+    socket.join(askerData.email + " waits for location");
+  })
+
+  {/* Notify asker that their helper has picked a location */}
+  socket.on("helper sets location", (data) => {
+    socket.to(data.askerEmail + " waits for location").emit("helper's location acquired", {
+      lat: data.helperLat, 
+      lng: data.helperLng
+    });
+  })
+
   // {/* Room for an asker looking at helper info */}
   // socket.on("look at helper info", (askerData) => {
   //   socket.join(askerData.email);

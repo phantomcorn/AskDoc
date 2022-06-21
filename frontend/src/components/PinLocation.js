@@ -1,8 +1,13 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import { useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Button } from 'react-bootstrap'
 import "../css/PinLocation.css"
+
+import io from 'socket.io-client';
+
+var socket;
 
 const mapContainerStyle = {
   width: "40vw",
@@ -25,6 +30,12 @@ export default function PinLocation() {
   const navi = useNavigate();
   const location = useLocation();
   const [marker, setMarker] = useState(null);
+  const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
+
+  useEffect(() => {
+    {/* Connect this user to the socket */}
+    socket = io(domain);
+  },[]);
 
   const onMapClick = useCallback((event) => {
     setMarker({
@@ -47,6 +58,7 @@ export default function PinLocation() {
       alert("You forgot to pin your location");
       return
     }
+    socket.emit("helper sets location", {helperLat: marker.lat, helperLng: marker.lng, askerEmail: location.state.asker.email});
     navi("/asker-info", {
       state : {
           asker : location.state.asker,

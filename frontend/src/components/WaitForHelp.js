@@ -39,7 +39,7 @@ export default function WaitForHelp() {
 
   useEffect(() => {
     {/* Controller listening for the event "my question picked" */}
-    socket.on("my question picked", (helperData) => navi('/helper-info', {
+    socket.on("my question picked", (helperData) => navi('/wait-for-location', {
       state : {
         helper : helperData,
         thread : location.state.thread
