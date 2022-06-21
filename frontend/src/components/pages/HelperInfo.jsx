@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import "../../css/HelperInfo.css";
 
 interface askerInfo {
     name : String, 
@@ -14,8 +15,8 @@ interface askerInfo {
 var socket;
 
 const mapContainerStyle = {
-  width: "30vw",
-  height: "30vh",
+  width: "40vw",
+  height: "40vh",
 };
 
 {/* William Penney Laboratory, South Kensington (Middle of Imperial College London) */}
@@ -94,7 +95,7 @@ export default function HelperInfo() {
 
 
     return (
-        <div>
+        <div className="helper-info-body">
             <div className="w-100 text-center mt-3">
                 <h1>Helper's Information</h1>
             </div>
