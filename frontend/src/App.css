@@ -69,3 +69,24 @@ map {
   height: 200px;
   width: 200px;
 }
+
+ul {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0b6EFD;
+}
+
+li {
+  float: left;
+  display: inline;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 5px 60px;
+  text-decoration: none;
+}

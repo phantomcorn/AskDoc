@@ -110,7 +110,7 @@ export default function Computing() {
     function Map(props) {
       return (
         <>
-        <h6>Asker's location</h6>
+        <h6>Asker's location:</h6>
         <GoogleMap 
           mapContainerStyle={mapContainerStyle} 
           zoom={16}
@@ -125,10 +125,9 @@ export default function Computing() {
 
     return(
         <div class="computing">
-            <h2>
-                Questions:
-            </h2>
-                <div class="language-filter">
+
+                <div class="filters">
+                <h5> Question Filter:<label>&nbsp;&nbsp;&nbsp;&nbsp;</label></h5>
                     <Form.Label> Language <label>&nbsp;&nbsp;</label> </Form.Label>
                     <select ref={tag1Ref} onChange={handleChange}> 
                         <option value="Any">Any</option>
@@ -141,9 +140,7 @@ export default function Computing() {
                         <option value="Scala">Scala</option>
                         <option value="R">R</option>
                     </select>
-                </div>
-            <br></br>
-                <div class="category-filter">
+                    <label>&nbsp;&nbsp;</label>
                     <Form.Label> Category <label>&nbsp;&nbsp;</label> </Form.Label>
                     <select ref={tag2Ref} onChange={handleChange}>
                         <option value="Any">Any</option> 
@@ -158,20 +155,28 @@ export default function Computing() {
                     </select>
                 </div>
             <div className='QuestionsList'>
+            <br></br>
             {threads.filter(tag1filter).filter(tag2filter).map((thread) =>{
                 return (
-                    <div key={thread._id} className="mb-3" class="question"> 
-                        <h6 class="tags">  #{thread.tag1} #{thread.tag2} </h6> 
-                        <h4 class="title">  {thread.title} </h4> 
-                        <div class="content">  {thread.content} </div>
+                  <div  key={thread._id} className="mb-3" class="question">
+                    <div>
+                        <button class="tag1">  #{thread.tag1} </button>
+                        <button class="tag2">  #{thread.tag2} </button>
+                        <br></br>
+                        <br></br>
+                    </div>
+                    <div>
+                        <h5 class="title"> Question: {thread.title} </h5>
+                        <h6 class="content"> Description: {thread.content} </h6>
                         <Map lat={thread.lat} lng={thread.lng} />
                         <button value={thread._id} onClick={handleSubmit} type="submit" class="answer">Answer this question</button>
+                    </div>
                     </div>
                 )
             })}
             </div>
             <div className="w-100 text-center mt-3">
-                <Link to="/"><h2>Cancel</h2></Link>
+                <Link to="/"><h5>Back</h5></Link>
             </div>
         </div>
     )

@@ -95,28 +95,30 @@ export default function HelperInfo() {
 
 
     return (
-        <div className="helper-info-body">
+    <div class="helper-info-body">
+
+        <div className="QuestionsList mb-3" class="question">
+            <h5 class="title"> Your Question: {thread.title} </h5>
+            <h6 class="content"> Description: {thread.content} </h6>
+        </div>
+
+        <div>
+            <div class="helper-info">
             <div className="w-100 text-center mt-3">
-                <h1>Helper's Information</h1>
+                  <h3>Helper's Information</h3>
             </div>
-            {/* <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
-            </div> */}
-            <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
-            </div>
-            <h2> Name : {helper.name} </h2>
-            <h2> Email : {helper.email} </h2>
-            <h2> Phone no. : {helper.phone} </h2>
-            <h2>Helper's Location</h2>
-            <GoogleMap 
-                mapContainerStyle={mapContainerStyle} 
+            <h5> Name : {helper.name} </h5>
+            <h5> Email : {helper.email} </h5>
+            <h5> Phone no. : {helper.phone} </h5>
+            <h5> Location: </h5>
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
                 zoom={17}
                 center={center}
                 options={options}
             >
                 {/* Asker's location */}
-                <Marker 
+                <Marker
                   position={{ lat: thread.lat, lng: thread.lng }}
                   icon={{
                     url: "/you-are-here.png",
@@ -126,6 +128,15 @@ export default function HelperInfo() {
                 {/* Helper's location */}
                 <Marker position={{ lat: location.state.helperLat, lng: location.state.helperLng }} />
             </GoogleMap>
+            </div>
+
+            {/* <div className="w-100 text-center mt-3">
+                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
+            </div> */}
+            <div className="w-100 text-center mt-3">
+                <Link to="/" onClick={handleRemove}><h3>Finish</h3></Link>
+            </div>
         </div>
+     </div>
     );
 };

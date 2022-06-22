@@ -112,11 +112,12 @@ export default function NonComputing() {
 
     return (
         <div class="non-computing">
+            <div>
             <Card>
                 <Form onSubmit={handleSave}>
                     <Form.Group id="tag">
                         <Form.Label> Language </Form.Label>
-                        <select ref={tag1Ref}> 
+                        <select ref={tag1Ref}>
                             <option value="General">General</option>
                             <option value="Python">Python</option>
                             <option value="C language">C language</option>
@@ -128,7 +129,7 @@ export default function NonComputing() {
                         </select>
                         <label>&nbsp;&nbsp;</label>
                         <Form.Label> Category </Form.Label>
-                        <select ref={tag2Ref}> 
+                        <select ref={tag2Ref}>
                             <option value="General">General</option>
                             <option value="Syntax">Syntax</option>
                             <option value="Data Structure">Data Structure</option>
@@ -138,19 +139,19 @@ export default function NonComputing() {
                             <option value="Hardware">Hardware</option>
                             <option value="Bugs">Bugs</option>
                         </select>
-                    </Form.Group>
-                    <Form.Group id="title">
-                        <Form.Label>Enter Message Title</Form.Label>
-                        <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
-                    </Form.Group>
-                    <Form.Group id="desc">
-                        <Form.Label>Enter Problem</Form.Label>
-                        <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
-                    </Form.Group>
-                    <Form.Label>Pin your location</Form.Label>
-                    <div class="google-map">
-                        <GoogleMap 
-                            mapContainerStyle={mapContainerStyle} 
+                        </Form.Group>
+                        <Form.Group id="title">
+                            <Form.Label>Enter Title</Form.Label>
+                            <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
+                        </Form.Group>
+                        <Form.Group id="desc">
+                            <Form.Label>Enter Problem</Form.Label>
+                            <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
+                        </Form.Group>
+                        <Form.Label>Pin your location</Form.Label>
+
+                        <GoogleMap
+                            mapContainerStyle={mapContainerStyle}
                             zoom={17}
                             center={center}
                             options={options}
@@ -160,15 +161,20 @@ export default function NonComputing() {
                             <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
                           }
                         </GoogleMap>
-                    </div>
-                    <Button className="w-100 mt-3" type="submit">
+
+                    <Button className="w-90 mt-3" type="submit">
                         Post a question
                     </Button>
                 </Form>
+
             </Card>
-            <div className="w-100  text-center mt-3">
-                <Link to="/"><h2>Cancel</h2></Link>
             </div>
+
+
+            <div className="w-40  text-center mt-3">
+                <Link to="/"><h5>Cancel</h5></Link>
+            </div>
+
         </div>
     );
 }

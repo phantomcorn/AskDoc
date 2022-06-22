@@ -87,24 +87,23 @@ export default function AskerInfo() {
             {/* <div className="w-100 text-center mt-3">
                 <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
             </div> */}
-            
-            <div className="QuestionsList mb-3" class="question"> 
-                <h2> Question : </h2>
-                <h4> #{thread.tag1} #{thread.tag2} </h4> 
-                <h2> {thread.title} </h2> 
-                <div> {thread.content} </div>
+
+            <div className="QuestionsList mb-3" class="question">
+                <h5 class="title"> Question: {thread.title} </h5>
+                <h6 class="content"> Description: {thread.content} </h6>
             </div>
 
-            <div class="asker-info"> 
+            <div class="asker-info">
+
                 <div className="w-100 text-center mt-3">
-                    <h1>Asker's Information</h1>
+                    <h3>Asker's Information</h3>
                 </div>
-                <h2> Name : {asker.name} </h2>
-                <h2> Email : {asker.email} </h2>
-                <h2> Phone no. : {asker.phone} </h2>
-                <div className="w-100 text-center mt-3">
-                    <h2>Asker's Location</h2>
-                </div>
+
+                <div>
+                <h5> Name : {asker.name} </h5>
+                <h5> Email : {asker.email} </h5>
+                <h5> Phone no. : {asker.phone} </h5>
+                <h5>Location :</h5>
                 <GoogleMap 
                     mapContainerStyle={mapContainerStyle} 
                     zoom={17}
@@ -123,10 +122,9 @@ export default function AskerInfo() {
                     <Marker position={{ lat: thread.lat, lng: thread.lng }} />
                 </GoogleMap>
             </div>
-            
-            
+            </div>
             <div className="w-100 text-center mt-3" class="finish">
-                <Link to="/" onClick={handleRemove}><h2>Finish</h2></Link>
+                            <Link to="/" onClick={handleRemove}><h3>Finish</h3></Link>
             </div>
         </div>
     );

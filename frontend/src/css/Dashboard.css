@@ -3,7 +3,7 @@ div.dashboard {
     flex-direction: column;
     margin: auto;
     width: 30%;
-    height : 50%;
+    height : 100%;
     justify-content: center;
 }
   

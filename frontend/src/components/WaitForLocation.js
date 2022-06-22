@@ -35,8 +35,8 @@ export default function WaitForLocation() {
 
   return (
     <div className="wait-for-location-body">
-      <h1 style={{color: "green"}}>Someone has picked up your question!</h1>
-      <h1>Please wait for their location</h1>
+      <h2 style={{color: "green"}}>Someone has picked up your question!</h2>
+      <h2>Please wait for their location</h2>
       <img className='spinner' src={loading} alt="loading..." />
     </div>
   );

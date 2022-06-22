@@ -3,6 +3,15 @@ div.asker-info-body {
     flex-direction: column;
     margin: auto;
     width : 50%;
-    height: 70%;
+    height: 50%;
     justify-content: center;
+}
+
+div.asker-info {
+      padding: 2%;
+      border-style: groove;
+      border-color: lightgrey;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      text-align: start;
 }

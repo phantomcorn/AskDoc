@@ -70,8 +70,10 @@ export default function PinLocation() {
   }
 
   return (
+  <div>
     <div className="pin-location-body">
-        <h1>Please pin your location</h1>
+        <h3>Please pin your location</h3>
+        <br></br>
         <GoogleMap 
             mapContainerStyle={mapContainerStyle} 
             zoom={17}
@@ -83,7 +85,10 @@ export default function PinLocation() {
                 <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
             }
         </GoogleMap>
-        <Button onClick={handlePickLocation} type="submit">Submit</Button>
     </div>
+    <div>
+        <Button onClick={handlePickLocation} type="submit" class="sub">Submit</Button>
+    </div>
+  </div>
   );
 }
