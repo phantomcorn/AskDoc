@@ -7,7 +7,7 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import "../../css/HelperInfo.css";
 import Legend from "../Legend";
 
-var socket;
+//var socket;
 
 const mapContainerStyle = {
   width: "40vw",
@@ -63,8 +63,7 @@ export default function HelperInfo() {
     }
 
     const { isLoaded, loadError } = useLoadScript({
-      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      // googleMapsApiKey: undefined,
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
 
     if (loadError) return "Error loading map";
@@ -130,7 +129,7 @@ export default function HelperInfo() {
                 />
             </GoogleMap>
             <Legend/>
-            <h6> Additional notes : {location.state.addNotes} </h6>
+            <h6> Helper's note : {location.state.helperNote} </h6>
             </div>
 
             {/* <div className="w-100 text-center mt-3">

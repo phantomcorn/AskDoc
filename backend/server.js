@@ -82,7 +82,8 @@ io.on("connection", (socket) => {
   socket.on("helper sets location", (data) => {
     socket.to(data.askerEmail + " waits for location").emit("helper's location acquired", {
       lat: data.helperLat, 
-      lng: data.helperLng
+      lng: data.helperLng,
+      helperNote : data.helperNote
     });
   })
 

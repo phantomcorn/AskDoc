@@ -52,8 +52,7 @@ export default function NonComputing() {
     }, []);
 
     const { isLoaded, loadError } = useLoadScript({
-      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      // googleMapsApiKey: undefined,
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
     
     if (loadError) return "Error loading map";
@@ -88,7 +87,8 @@ export default function NonComputing() {
             owner: currentUser.email,
             answer : "",
             lat : marker.lat,
-            lng : marker.lng
+            lng : marker.lng,
+            askerNote : locationRef.current.value,
         }
 
         await axios.post(`${domain}/api/threads`, newThread).then(function(res) {
@@ -100,7 +100,6 @@ export default function NonComputing() {
               navi('/wait-for-help', {
                 state : {
                   thread : res.data,
-                  addNotes : locationRef.current.value
                 }
               });
             }
@@ -166,7 +165,7 @@ export default function NonComputing() {
                         </GoogleMap>
                         <Form>
                             <Form.Group id="add-notes">
-                                <Form.Control type="notes" ref={locationRef} placeholder="Additional notes" as="textarea"/>
+                                <Form.Control type="notes" ref={locationRef} placeholder="Additional notes (e.g. floor)" as="textarea"/>
                             </Form.Group>
                         </Form>
                         <Button className="w-90 mt-3" type="submit">

@@ -21,11 +21,9 @@ function App() {
   return (
     <Container className="background">
       <div className="main-body">
-        <body>
         <ul>
           <li><h2>AskDoC</h2></li>
         </ul>
-        </body>
         <Router>
             <AuthProvider>
               <Routes>

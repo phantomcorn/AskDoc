@@ -4,7 +4,6 @@ import { useState, useCallback, useRef } from 'react';
 import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap'
 import "../css/PinLocation.css"
-
 import io from 'socket.io-client';
 
 var socket;
@@ -34,6 +33,7 @@ export default function PinLocation() {
   const navi = useNavigate();
   const location = useLocation();
   const locationRef = useRef();
+  const thread = location.state.thread;
   const [marker, setMarker] = useState(null);
   const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
 
@@ -63,14 +63,14 @@ export default function PinLocation() {
       alert("You forgot to pin your location");
       return
     }
-    socket.emit("helper sets location", {helperLat: marker.lat, helperLng: marker.lng, askerEmail: location.state.asker.email});
+
+    socket.emit("helper sets location", {helperLat: marker.lat, helperLng: marker.lng, askerEmail: location.state.asker.email, helperNote : locationRef.current.value});
     navi("/asker-info", {
       state : {
           asker : location.state.asker,
-          thread : location.state.thread,
+          thread : thread,
           helperLat : marker.lat,
           helperLng : marker.lng,
-          addNotes : locationRef.current.value
       }
     });
   }

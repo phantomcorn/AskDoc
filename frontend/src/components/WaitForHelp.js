@@ -42,7 +42,6 @@ export default function WaitForHelp() {
       state : {
         helper : helperData,
         thread : location.state.thread,
-        addNotes : location.state.addNotes
       }}));
   });
 

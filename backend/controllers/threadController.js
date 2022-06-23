@@ -26,7 +26,8 @@ const setThread = asyncHandler(async (req, res) => {
             owner : req.body.owner,
             answer : "",
             lat : req.body.lat,
-            lng : req.body.lng
+            lng : req.body.lng,
+            askerNote : req.body.askerNote
         })
     
         res.status(200).json(thread)
@@ -48,22 +49,12 @@ const putThread = asyncHandler(async (req,res) => {
         throw new Error("Unable to find thread")
     }
 
-    const newBody = {
-        tag1 : threadToUpdate.tag1,
-        tag2 : threadToUpdate.tag2,
-        title : threadToUpdate.title,
-        content: threadToUpdate.content,
-        owner : threadToUpdate.owner,
-        answer : req.body.answer,
-        lat : threadToUpdate.lat,
-        lng : threadToUpdate.lng
+    const updatedField = {
+        answer : req.body.answer
     }
 
     //update value of new thread
-    const updatedThread = await Thread.findByIdAndUpdate(req.params.id, 
-        newBody, {
-            new: true
-        })
+    const updatedThread = await Thread.findByIdAndUpdate(req.params.id,updatedField)
 
     res.status(200).json(updatedThread)
 })
@@ -84,39 +75,7 @@ const deleteThread = asyncHandler(async (req,res) => {
     res.status(200).json({id : req.params.id})
 })
 
-// @route UPDATED /api/threads/:id
-// change thread to answerable
-const returnThread = asyncHandler(async (req,res) => {
-
-    //find thread to update
-    const threadToUpdate = await Thread.findById(req.params.id)
-
-    if (!threadToUpdate) {
-        res.status(400)
-        throw new Error("Unable to find thread")
-    }
-
-    const newBody = {
-        tag1 : threadToUpdate.tag1,
-        tag2 : threadToUpdate.tag2,
-        title : threadToUpdate.title,
-        content: threadToUpdate.content,
-        owner : threadToUpdate.owner,
-        answer : "",
-        lat : threadToUpdate.lat,
-        lng : threadToUpdate.lng
-    }
-
-    //update value of new thread
-    const updatedThread = await Thread.findByIdAndUpdate(req.params.id, 
-        newBody, {
-            new: true
-        })
-
-    res.status(200).json(updatedThread)
-})
-
 
 module.exports = {
-    getThreads, setThread, putThread, deleteThread, returnThread
+    getThreads, setThread, putThread, deleteThread
 }

@@ -31,8 +31,8 @@ const options = {
 
 export default function Computing() {
     const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : "http://localhost:5000"
-    const tag1Ref = useRef();
-    const tag2Ref = useRef();
+    const tag1Ref = useRef("Any");
+    const tag2Ref = useRef("Any");
     const threadHost = `${domain}/api/threads`;
     const accountHost = `${domain}/api/accounts`;
     const [threads, setThreads] = useState([]);

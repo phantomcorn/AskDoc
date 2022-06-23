@@ -1,7 +1,6 @@
 import loading from '../assets/spinner.gif'
 import "../css/WaitForLocation.css"
 import { useNavigate, useLocation } from "react-router-dom";
-
 import io from 'socket.io-client';
 import { useEffect } from 'react';
 import { useAuth } from "../contexts/AuthContext";
@@ -23,13 +22,14 @@ export default function WaitForLocation() {
   }, []);
 
   useEffect(() => {
+
     socket.on("helper's location acquired", (helperLocation) => navi('/helper-info', {
       state : {
         helper : location.state.helper,
         helperLat : helperLocation.lat,
         helperLng : helperLocation.lng,
         thread : location.state.thread,
-        addNotes : location.state.addNotes
+        helperNote : helperLocation.helperNote
       }
     }));
   });

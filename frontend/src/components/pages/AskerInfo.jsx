@@ -39,8 +39,7 @@ export default function AskerInfo() {
     const navi = useNavigate();
 
     const { isLoaded, loadError } = useLoadScript({
-      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      // googleMapsApiKey: undefined,
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
     
     if (loadError) return "Error loading map";
@@ -129,7 +128,7 @@ export default function AskerInfo() {
                     />
                 </GoogleMap>
                 <Legend />
-                <h6> Additional notes : {location.state.addNotes} </h6>
+                <h6> Asker's notes : {thread.askerNote} </h6>
             </div>
             </div>
             <div className="w-100 text-center mt-3" class="finish">

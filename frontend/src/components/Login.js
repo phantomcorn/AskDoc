@@ -28,7 +28,7 @@ export default function Signup() {
   }
 
   return (
-    <div class="login-body">
+    <div className="login-body">
         <Card>
             <Card.Body>
                 <h2 className="text-center mb-4"> Log In </h2>

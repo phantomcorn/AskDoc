@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 
 /*model for database
+    tag1 - code language
+    tag2 - type of problem
     title - title of question
     content - details of question
     owner - person asking the question
     answer - person answering the question (defaults to "")
+    lat - latitude of location
+    lng - longitude of location
+    askerNote - detail of location
 */
 const threadSchema = {
     tag1 : String,
@@ -14,7 +19,8 @@ const threadSchema = {
     owner: String,
     answer : String,
     lat : Number,
-    lng : Number
+    lng : Number,
+    askerNote : String
 }
 
 //REST API on ThreadsDB.threads
