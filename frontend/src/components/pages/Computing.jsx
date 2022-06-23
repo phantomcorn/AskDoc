@@ -73,7 +73,7 @@ export default function Computing() {
         e.preventDefault()
         const id = e.target.value
         const threadToUpdate = {
-            id : id,
+            _id : id,
             answer : currentUser.email
         }
 
