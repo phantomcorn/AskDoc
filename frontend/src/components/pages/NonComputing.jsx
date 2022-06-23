@@ -162,7 +162,13 @@ export default function NonComputing() {
                             onClick={onMapClick}
                         >
                           { marker !== null &&
-                            <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
+                            <Marker 
+                              position={{ lat: marker.lat, lng: marker.lng }}
+                              icon={{
+                                url: "/you-are-here.png",
+                                scaledSize: new window.google.maps.Size(15, 15)
+                              }}
+                            />
                           }
                         </GoogleMap>
 

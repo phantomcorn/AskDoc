@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
 import "../../css/AskerInfo.css";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import Legend from "../Legend";
 var socket;
 
 const mapContainerStyle = {
@@ -119,12 +120,15 @@ export default function AskerInfo() {
                       position={{ lat: location.state.helperLat, lng: location.state.helperLng }}
                       icon={{
                         url: "/you-are-here.png",
-                        scaledSize: new window.google.maps.Size(20, 20)
+                        scaledSize: new window.google.maps.Size(15, 15)
                       }}
                     />
                     {/* Asker's location */}
-                    <Marker position={{ lat: thread.lat, lng: thread.lng }} />
+                    <Marker 
+                      position={{ lat: thread.lat, lng: thread.lng }} 
+                    />
                 </GoogleMap>
+                <Legend />
             </div>
             </div>
             <div className="w-100 text-center mt-3" class="finish">

@@ -1,0 +1,10 @@
+.legend {
+  display: flex;
+  width: 330px;
+  height: 100px;
+  border-style: solid;
+}
+
+.text {
+  margin: auto;
+}
