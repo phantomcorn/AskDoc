@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
     tag2 - type of problem
     title - title of question
     content - details of question
+    link - any links helper may find useful (defaults to "")
     owner - person asking the question
     answer - person answering the question (defaults to "")
     lat - latitude of location
@@ -16,6 +17,7 @@ const threadSchema = {
     tag2 : String,
     title : String,
     content : String,
+    link : String,
     owner: String,
     answer : String,
     lat : Number,

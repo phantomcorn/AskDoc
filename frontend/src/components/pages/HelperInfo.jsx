@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
@@ -38,6 +37,16 @@ export default function HelperInfo() {
     const thread = location.state.thread
     const navi = useNavigate();
     const {currentUser} = useAuth();
+    
+    
+    let linkState = false;
+    
+    if (thread.link !== "") {
+      linkState = true;
+    }
+
+    let link = <a href={thread.link} target="_blank"> Link</a>
+
     
     // const handleCancel = async e => {
     //     e.preventDefault()
@@ -98,6 +107,7 @@ export default function HelperInfo() {
         <div className="QuestionsList mb-3" class="question">
             <h5 class="title"> Your Question: {thread.title} </h5>
             <h6 class="content"> Description: {thread.content} </h6>
+            <div class="link"> {linkState && link} </div>
         </div>
 
         <div>

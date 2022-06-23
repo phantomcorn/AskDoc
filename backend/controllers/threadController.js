@@ -23,6 +23,7 @@ const setThread = asyncHandler(async (req, res) => {
             tag2 : req.body.tag2,
             title : req.body.title,
             content : req.body.content,
+            link : req.body.link,
             owner : req.body.owner,
             answer : "",
             lat : req.body.lat,

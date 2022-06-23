@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
@@ -37,6 +36,15 @@ export default function AskerInfo() {
     const thread = location.state.thread
     const {currentUser} = useAuth();
     const navi = useNavigate();
+
+    let linkState = false;
+    
+    if (thread.link !== "") {
+      linkState = true;
+    }
+
+    let link = <a href={thread.link} target="_blank"> Link</a>
+
 
     const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
@@ -95,6 +103,7 @@ export default function AskerInfo() {
             <div className="QuestionsList mb-3" class="question">
                 <h5 class="title"> Question: {thread.title} </h5>
                 <h6 class="content"> Description: {thread.content} </h6>
+                <div class="link"> {linkState && link} </div>
             </div>
 
             <div class="asker-info">

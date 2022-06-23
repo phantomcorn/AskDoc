@@ -39,6 +39,7 @@ export default function NonComputing() {
     const tag2Ref = useRef();
     const titleRef = useRef();
     const contentRef = useRef();
+    const linkRef = useRef();
     const locationRef = useRef();
     const navi = useNavigate();
 
@@ -68,6 +69,9 @@ export default function NonComputing() {
         let tagCat = tag2Ref.current.value;
         let summary= titleRef.current.value;
         let detail = contentRef.current.value;
+        let link = linkRef.current.value;
+        let askerNote = locationRef.current.value;
+
         
         if (detail === "" || summary=== "") {
             alert("You forgot to fill in a field");
@@ -84,11 +88,12 @@ export default function NonComputing() {
             tag2 : tagCat,
             title: summary,
             content : detail,
+            link : link,
             owner: currentUser.email,
             answer : "",
             lat : marker.lat,
             lng : marker.lng,
-            askerNote : locationRef.current.value,
+            askerNote : askerNote
         }
 
         await axios.post(`${domain}/api/threads`, newThread).then(function(res) {
@@ -139,6 +144,10 @@ export default function NonComputing() {
                         <Form.Group id="title">
                             <Form.Label>Enter Title</Form.Label>
                             <Form.Control type="title" ref={titleRef} required placeholder="Title/Summary"/>
+                        </Form.Group>
+                        <Form.Group id="link">
+                            <Form.Label> {`Enter link (optional)`} </Form.Label>
+                            <Form.Control type="link" ref={linkRef} placeholder="Link"/>
                         </Form.Group>
                         <Form.Group id="desc">
                             <Form.Label>Enter Problem</Form.Label>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import io from 'socket.io-client';
 import { useAuth } from '../../contexts/AuthContext';
 import "../../css/Computing.css"
@@ -161,6 +161,11 @@ export default function Computing() {
             <div className='QuestionsList'>
             <br></br>
             {threads.filter(tag1filter).filter(tag2filter).map((thread) =>{
+
+                let linkState = false;
+                let link = <a href={thread.link} target="_blank"> Link</a>
+                if (thread.link !== "") linkState = true;
+
                 return (
                   <div  key={thread._id} className="mb-3" class="question">
                     <div>
@@ -172,6 +177,9 @@ export default function Computing() {
                     <div>
                         <h5 class="title"> Question: {thread.title} </h5>
                         <h6 class="content"> Description: {thread.content} </h6>
+                        <div class="link">
+                          {linkState && link}
+                        </div>
                         <Map lat={thread.lat} lng={thread.lng} />
                         <button value={thread._id} onClick={handleSubmit} type="submit" class="answer">Answer this question</button>
                     </div>
