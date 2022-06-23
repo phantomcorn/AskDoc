@@ -28,6 +28,10 @@ const center = {
 const options = {
   disableDefaultUI: true,
   zoomControl: true,
+  restriction: {
+    latLngBounds: { north: 51.501872, south: 51.497016, east: -0.170290, west: -0.180225 },
+    strictBounds: true,
+  },
 };
 
 export default function HelperInfo() {
