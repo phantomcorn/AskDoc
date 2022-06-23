@@ -5,6 +5,10 @@ import io from 'socket.io-client';
 import { useAuth } from "../../contexts/AuthContext";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import "../../css/HelperInfo.css";
+<<<<<<< HEAD
+=======
+import Legend from "../Legend";
+>>>>>>> df36281a82796f5a6a2bb0f6f3596ec7c81b3744
 
 var socket;
 
@@ -120,13 +124,19 @@ export default function HelperInfo() {
                   position={{ lat: thread.lat, lng: thread.lng }}
                   icon={{
                     url: "/you-are-here.png",
-                    scaledSize: new window.google.maps.Size(20, 20)
+                    scaledSize: new window.google.maps.Size(15, 15)
                   }}
                 />
                 {/* Helper's location */}
-                <Marker position={{ lat: location.state.helperLat, lng: location.state.helperLng }} />
+                <Marker 
+                  position={{ lat: location.state.helperLat, lng: location.state.helperLng }} 
+                />
             </GoogleMap>
+<<<<<<< HEAD
             <h6> Additional notes : {location.state.addNotes} </h6>
+=======
+            <Legend />
+>>>>>>> df36281a82796f5a6a2bb0f6f3596ec7c81b3744
             </div>
 
             {/* <div className="w-100 text-center mt-3">
