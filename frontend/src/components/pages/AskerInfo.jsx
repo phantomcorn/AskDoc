@@ -125,6 +125,7 @@ export default function AskerInfo() {
                     {/* Asker's location */}
                     <Marker position={{ lat: thread.lat, lng: thread.lng }} />
                 </GoogleMap>
+                <h6> Additional notes : {location.state.addNotes} </h6>
             </div>
             </div>
             <div className="w-100 text-center mt-3" class="finish">

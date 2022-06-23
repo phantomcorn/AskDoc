@@ -39,6 +39,7 @@ export default function NonComputing() {
     const tag2Ref = useRef();
     const titleRef = useRef();
     const contentRef = useRef();
+    const locationRef = useRef();
     const navi = useNavigate();
 
     const [marker, setMarker] = useState(null);
@@ -98,20 +99,12 @@ export default function NonComputing() {
               socket.emit("new question posted", res.data);
               navi('/wait-for-help', {
                 state : {
-                  thread : res.data 
+                  thread : res.data,
+                  addNotes : locationRef.current.value
                 }
               });
             }
         });
-    }
-
-    function Map() {
-        return(
-            <>
-                <h4> Pin your location</h4>
-                <img src={map} alt="Map" className='map'></img>
-            </>
-        );
     }
 
     return (
@@ -165,8 +158,12 @@ export default function NonComputing() {
                             <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
                           }
                         </GoogleMap>
-
-                    <Button className="w-90 mt-3" type="submit">
+                        <Form>
+                            <Form.Group id="add-notes">
+                                <Form.Control type="notes" ref={locationRef} placeholder="Additional notes" as="textarea"/>
+                            </Form.Group>
+                        </Form>
+                        <Button className="w-90 mt-3" type="submit">
                         Post a question
                     </Button>
                 </Form>

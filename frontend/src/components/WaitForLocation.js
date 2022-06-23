@@ -29,6 +29,7 @@ export default function WaitForLocation() {
         helperLat : helperLocation.lat,
         helperLng : helperLocation.lng,
         thread : location.state.thread,
+        addNotes : location.state.addNotes
       }
     }));
   });

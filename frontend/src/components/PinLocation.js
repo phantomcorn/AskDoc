@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useEffect } from 'react';
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import "../css/PinLocation.css"
 
 import io from 'socket.io-client';
@@ -33,6 +33,7 @@ export default function PinLocation() {
 
   const navi = useNavigate();
   const location = useLocation();
+  const locationRef = useRef();
   const [marker, setMarker] = useState(null);
   const domain = process.env.NODE_ENV === "production" ? "https://drp-askdoc.herokuapp.com" : `http://localhost:5000`
 
@@ -69,6 +70,7 @@ export default function PinLocation() {
           thread : location.state.thread,
           helperLat : marker.lat,
           helperLng : marker.lng,
+          addNotes : locationRef.current.value
       }
     });
   }
@@ -89,6 +91,10 @@ export default function PinLocation() {
                 <Marker position={{ lat: marker.lat, lng: marker.lng }}/>
             }
         </GoogleMap>
+        <Form.Group id="add-notes">
+          <Form.Control type="notes" ref={locationRef} placeholder="Additional notes" as="textarea"/>
+        </Form.Group>
+  
     </div>
     <div>
         <Button onClick={handlePickLocation} type="submit" class="sub">Submit</Button>

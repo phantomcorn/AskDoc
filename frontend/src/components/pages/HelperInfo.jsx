@@ -6,12 +6,6 @@ import { useAuth } from "../../contexts/AuthContext";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import "../../css/HelperInfo.css";
 
-interface askerInfo {
-    name : String, 
-    email: String, 
-    phone : String
-};
-
 var socket;
 
 const mapContainerStyle = {
@@ -132,6 +126,7 @@ export default function HelperInfo() {
                 {/* Helper's location */}
                 <Marker position={{ lat: location.state.helperLat, lng: location.state.helperLng }} />
             </GoogleMap>
+            <h6> Additional notes : {location.state.addNotes} </h6>
             </div>
 
             {/* <div className="w-100 text-center mt-3">

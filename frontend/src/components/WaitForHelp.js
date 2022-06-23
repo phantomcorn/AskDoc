@@ -4,7 +4,6 @@ import axios from "axios";
 import { Button } from 'react-bootstrap'
 import sandclock from "../assets/sandclock.png"
 import "../css/WaitForHelp.css"
-
 import io from 'socket.io-client';
 import { useAuth } from "../contexts/AuthContext";
 
@@ -42,7 +41,8 @@ export default function WaitForHelp() {
     socket.on("my question picked", (helperData) => navi('/wait-for-location', {
       state : {
         helper : helperData,
-        thread : location.state.thread
+        thread : location.state.thread,
+        addNotes : location.state.addNotes
       }}));
   });
 
@@ -50,7 +50,6 @@ export default function WaitForHelp() {
     <div class="wait-for-help-body">
       <div>
         { typeof(location.state.message) === 'undefined' ?
-
           <h2>Your question has been submitted. <br></br>Please wait...</h2>
           :
           <h2>The helper cancels your question. Please wait for another helper...</h2> }
