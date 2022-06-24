@@ -15,3 +15,10 @@ div.asker-info {
       margin-bottom: 15px;
       text-align: start;
 }
+
+div.google-map {
+  display: flex;
+  overflow: auto;
+  justify-content: center;
+}
+

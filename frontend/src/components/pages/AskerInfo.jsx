@@ -117,25 +117,27 @@ export default function AskerInfo() {
                 <h5> Email : {asker.email} </h5>
                 <h5> Phone no. : {asker.phone} </h5>
                 <h5>Location :</h5>
-                <GoogleMap 
-                    mapContainerStyle={mapContainerStyle} 
-                    zoom={17}
-                    center={center}
-                    options={options}
-                >
-                    {/* Helper's location */}
-                    <Marker 
-                      position={{ lat: location.state.helperLat, lng: location.state.helperLng }}
-                      icon={{
-                        url: "/you-are-here.png",
-                        scaledSize: new window.google.maps.Size(15, 15)
-                      }}
-                    />
-                    {/* Asker's location */}
-                    <Marker 
-                      position={{ lat: thread.lat, lng: thread.lng }} 
-                    />
-                </GoogleMap>
+                <div class="google-map">
+                  <GoogleMap 
+                      mapContainerStyle={mapContainerStyle} 
+                      zoom={17}
+                      center={center}
+                      options={options}
+                  >
+                      {/* Helper's location */}
+                      <Marker 
+                        position={{ lat: location.state.helperLat, lng: location.state.helperLng }}
+                        icon={{
+                          url: "/you-are-here.png",
+                          scaledSize: new window.google.maps.Size(15, 15)
+                        }}
+                      />
+                      {/* Asker's location */}
+                      <Marker 
+                        position={{ lat: thread.lat, lng: thread.lng }} 
+                      />
+                  </GoogleMap>
+                </div>
                 <Legend />
                 <h6> Asker's notes : {thread.askerNote} </h6>
             </div>

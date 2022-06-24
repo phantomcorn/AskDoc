@@ -119,25 +119,27 @@ export default function HelperInfo() {
             <h5> Email : {helper.email} </h5>
             <h5> Phone no. : {helper.phone} </h5>
             <h5> Location: </h5>
-            <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                zoom={17}
-                center={center}
-                options={options}
-            >
-                {/* Asker's location */}
-                <Marker
-                  position={{ lat: thread.lat, lng: thread.lng }}
-                  icon={{
-                    url: "/you-are-here.png",
-                    scaledSize: new window.google.maps.Size(15, 15)
-                  }}
-                />
-                {/* Helper's location */}
-                <Marker 
-                  position={{ lat: location.state.helperLat, lng: location.state.helperLng }} 
-                />
-            </GoogleMap>
+            <div class="google-map">
+              <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  zoom={17}
+                  center={center}
+                  options={options}
+              >
+                  {/* Asker's location */}
+                  <Marker
+                    position={{ lat: thread.lat, lng: thread.lng }}
+                    icon={{
+                      url: "/you-are-here.png",
+                      scaledSize: new window.google.maps.Size(15, 15)
+                    }}
+                  />
+                  {/* Helper's location */}
+                  <Marker 
+                    position={{ lat: location.state.helperLat, lng: location.state.helperLng }} 
+                  />
+              </GoogleMap>
+            </div>
             <Legend/>
             <h6> Helper's note : {location.state.helperNote} </h6>
             </div>
