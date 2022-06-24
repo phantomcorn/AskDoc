@@ -1,12 +1,10 @@
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import io from 'socket.io-client';
+import { Button } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import "../../css/HelperInfo.css";
 import Legend from "../Legend";
-
-//var socket;
 
 const mapContainerStyle = {
   width: "40vw",
@@ -47,21 +45,6 @@ export default function HelperInfo() {
 
     let link = <a href={thread.link} target="_blank"> Link</a>
 
-    
-    // const handleCancel = async e => {
-    //     e.preventDefault()
-    //     const res = await axios.put(`${threadHost}/return/${thread._id}`)
-    //     socket.emit("notify cancel to helper", helper);
-
-    //     {/* Notify the socket for the event "new question posted" */}
-    //     socket.emit("new question posted", res.data);
-    //     navi('/wait-for-help', {
-    //       state : {
-    //         thread : thread
-    //       }
-    //     })
-    // }
-
     const handleRemove = async () => {
         await axios.delete(`${threadHost}/${thread._id}`).catch(
           (err) => {
@@ -78,29 +61,6 @@ export default function HelperInfo() {
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Loading map...";
 
-    // useEffect(() => {
-    //     {/* Connect this user to the socket */}
-    //     socket = io(domain);
-    //     socket.emit("look at helper info", currentUser);
-    // }, [location]);
-
-    // useEffect(() => {
-    //     // {/* If helper clicks cancel before asker */}
-    //     // socket.on("helper cancels", () => navi('/wait-for-help', {
-    //     //   state : {
-    //     //     message : "Helper cancels your question",
-    //     //     thread : thread
-    //     //   }
-    //     // }));
-    //     {/* If helper clicks finish before asker */}
-    //     socket.on("helper finishes", () => navi('/', {
-    //       state : {
-    //         message : "The helper finishes answering your question. Thank for asking :)",
-    //       }
-    //     }));
-    // })
-
-
     return (
     <div class="helper-info-body">
 
@@ -111,7 +71,7 @@ export default function HelperInfo() {
         </div>
 
         <div>
-            <div class="helper-info">
+          <div class="helper-info">
             <div className="w-100 text-center mt-3">
                   <h3>Helper's Information</h3>
             </div>
@@ -141,15 +101,13 @@ export default function HelperInfo() {
               </GoogleMap>
             </div>
             <Legend/>
-            <h6> Helper's notes : {location.state.helperNote} </h6>
-            </div>
-
-            {/* <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
-            </div> */}
-            <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleRemove}><h3>Finish</h3></Link>
-            </div>
+            <h6> Helper's note : {location.state.helperNote} </h6>
+          </div>
+          <Link to="/" onClick={handleRemove}>
+            <Button className="w-90 mt-3" type="button">
+              Finish
+            </Button>
+          </Link>
         </div>
      </div>
     );

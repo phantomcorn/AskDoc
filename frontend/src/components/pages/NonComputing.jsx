@@ -178,19 +178,20 @@ export default function NonComputing() {
                                 <Form.Control type="notes" ref={locationRef} placeholder="Additional notes (e.g. floor)" as="textarea"/>
                             </Form.Group>
                         </Form>
+                        
                         <Button className="w-90 mt-3" type="submit">
-                        Post a question
-                    </Button>
+                            Post a question
+                        </Button>
+                        <span/>
+                        <Link to="/">
+                            <Button className="w-90 mt-3" type="button">
+                                Cancel
+                            </Button>
+                        </Link>
+                        
                 </Form>
-
             </Card>
             </div>
-
-
-            <div className="w-40  text-center mt-3">
-                <Link to="/"><h5>Cancel</h5></Link>
-            </div>
-
         </div>
     );
 }

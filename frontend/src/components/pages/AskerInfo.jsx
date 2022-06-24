@@ -1,11 +1,10 @@
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import io from 'socket.io-client';
+import { Button } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../css/AskerInfo.css";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import Legend from "../Legend";
-var socket;
 
 const mapContainerStyle = {
   width: "40vw",
@@ -52,14 +51,6 @@ export default function AskerInfo() {
     
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Loading map...";
-    
-    // const handleCancel = async () => {
-    //     const res = await axios.put(`${threadHost}/return/${thread._id}`)
-    //     socket.emit("notify cancel to asker", asker);
-
-    //     {/* Notify the socket for the event "new question posted" */}
-    //     socket.emit("new question posted", res.data);
-    // }
 
     const handleRemove = async () => {
         await axios.delete(`${threadHost}/${thread._id}`).catch(
@@ -67,84 +58,55 @@ export default function AskerInfo() {
             console.log("The question has already been removed from the db");
           }
         )
-        // socket.emit("notify finish to asker", asker);
     }
 
-    // useEffect(() => {
-    //     {/* Connect this user to the socket */}
-    //     socket = io(domain);
-    //     socket.emit("look at asker info", currentUser);
-    // }, [location]);
-
-    // useEffect(() => {
-    //     // {/* If asker clicks cancel before helper */}
-    //     // socket.on("asker cancels", () => navi('/', {
-    //     //   state : {
-    //     //     message : "Asker cancels your help",
-    //     //     thread : thread
-    //     //   }
-    //     // }));
-    //     {/* If asker clicks finish before helper */}
-    //     socket.on("asker finishes", () => navi('/', {
-    //       state : {
-    //         message : "The asker finishes the session. Thank for helping :)",
-    //       }
-    //     }));
-    // })
-
-
     return (
-        <div class="asker-info-body">
-            
-            {/* <div className="w-100 text-center mt-3">
-                <Link to="/" onClick={handleCancel} ><h2>Cancel</h2></Link>
-            </div> */}
+      <div class="asker-info-body">
+          <div className="QuestionsList mb-3" class="question">
+              <h5 class="title"> Question: {thread.title} </h5>
+              <h6 class="content"> Description: {thread.content} </h6>
+              <div class="link"> {linkState && link} </div>
+          </div>
 
-            <div className="QuestionsList mb-3" class="question">
-                <h5 class="title"> Question: {thread.title} </h5>
-                <h6 class="content"> Description: {thread.content} </h6>
-                <div class="link"> {linkState && link} </div>
-            </div>
-
+          <div>
             <div class="asker-info">
-
-                <div className="w-100 text-center mt-3">
-                    <h3>Asker's Information</h3>
-                </div>
-
-                <div>
-                <h5> Name : {asker.name} </h5>
-                <h5> Email : {asker.email} </h5>
-                <h5> Phone no. : {asker.phone} </h5>
-                <h5>Location :</h5>
-                <div class="google-map">
-                  <GoogleMap 
-                      mapContainerStyle={mapContainerStyle} 
-                      zoom={17}
-                      center={center}
-                      options={options}
-                  >
-                      {/* Helper's location */}
-                      <Marker 
-                        position={{ lat: location.state.helperLat, lng: location.state.helperLng }}
-                        icon={{
-                          url: "/you-are-here.png",
-                          scaledSize: new window.google.maps.Size(15, 15)
-                        }}
-                      />
-                      {/* Asker's location */}
-                      <Marker 
-                        position={{ lat: thread.lat, lng: thread.lng }} 
-                      />
-                  </GoogleMap>
-                </div>
-                <Legend />
-                <h6> Asker's notes : {thread.askerNote} </h6>
+            <div className="w-100 text-center mt-3">
+                <h3>Asker's Information</h3>
             </div>
+            <h5> Name : {asker.name} </h5>
+            <h5> Email : {asker.email} </h5>
+            <h5> Phone no. : {asker.phone} </h5>
+            <h5>Location :</h5>
+            <div class="google-map">
+              <GoogleMap 
+                  mapContainerStyle={mapContainerStyle} 
+                  zoom={17}
+                  center={center}
+                  options={options}
+              >
+                  {/* Helper's location */}
+                  <Marker 
+                    position={{ lat: location.state.helperLat, lng: location.state.helperLng }}
+                    icon={{
+                      url: "/you-are-here.png",
+                      scaledSize: new window.google.maps.Size(15, 15)
+                    }}
+                  />
+                  {/* Asker's location */}
+                  <Marker 
+                    position={{ lat: thread.lat, lng: thread.lng }} 
+                  />
+              </GoogleMap>
             </div>
-            <div className="w-100 text-center mt-3" class="finish">
-                            <Link to="/" onClick={handleRemove}><h3>Finish</h3></Link>
+            <Legend />
+            <h6> Asker's notes : {thread.askerNote} </h6>
             </div>
-        </div>
+            <Link to="/" onClick={handleRemove}>
+              <Button className="w-90 mt-3" type="button">
+                Finish
+              </Button>
+            </Link>
+          </div>
+      </div>
     );
 };

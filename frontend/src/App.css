@@ -46,6 +46,7 @@
 
 .background {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   max-height: 100%;
@@ -54,8 +55,18 @@
   height: 100%
 }
 
+div.topnav {
+  display: flex;
+  width: 100%;
+  background-color: #0b6EFD;
+}
+
+h2.logo {
+  margin-left: 0.5rem;
+}
+
+
 div.main-body {
-  position: absolute;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -63,6 +74,7 @@ div.main-body {
   width: 100%;
   height : 100%;
   justify-content: center;
+  overflow: scroll;
 }
 
 
@@ -71,15 +83,10 @@ map {
   width: 200px;
 }
 
-ul {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #0b6EFD;
+div.google-map {
+  display: flex;
+  overflow: auto;
+  justify-content: center;
 }
 
 li {

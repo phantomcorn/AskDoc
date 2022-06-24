@@ -19,11 +19,11 @@ import {AuthProvider} from "./contexts/AuthContext"
 
 function App() {
   return (
-    <Container className="background">
+    <div className="background">
+      <div className="topnav">
+        <h2 className="logo">AskDoc</h2>
+      </div>  
       <div className="main-body">
-        <ul>
-          <li><h2>AskDoC</h2></li>
-        </ul>
         <Router>
             <AuthProvider>
               <Routes>
@@ -85,7 +85,7 @@ function App() {
             </AuthProvider>
         </Router>
       </div>
-    </Container>
+    </div>
   );
 }
 

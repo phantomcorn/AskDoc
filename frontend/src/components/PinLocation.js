@@ -80,23 +80,25 @@ export default function PinLocation() {
     <div className="pin-location-body">
         <h3>Please pin your location</h3>
         <br></br>
-        <GoogleMap 
-            mapContainerStyle={mapContainerStyle} 
-            zoom={17}
-            center={center}
-            options={options}
-            onClick={onMapClick}
-        >
-            { marker !== null &&
-                <Marker 
-                  position={{ lat: marker.lat, lng: marker.lng }}
-                  icon={{
-                    url: "/you-are-here.png",
-                    scaledSize: new window.google.maps.Size(15, 15)
-                  }}
-                />
-            }
-        </GoogleMap>
+        <div class="google-map">
+          <GoogleMap 
+              mapContainerStyle={mapContainerStyle} 
+              zoom={17}
+              center={center}
+              options={options}
+              onClick={onMapClick}
+          >
+              { marker !== null &&
+                  <Marker 
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    icon={{
+                      url: "/you-are-here.png",
+                      scaledSize: new window.google.maps.Size(15, 15)
+                    }}
+                  />
+              }
+          </GoogleMap>
+        </div>
         <Form.Group id="add-notes">
           <Form.Control type="notes" ref={locationRef} placeholder="Additional notes" as="textarea"/>
         </Form.Group>

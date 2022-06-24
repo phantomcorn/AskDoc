@@ -7,9 +7,6 @@ div.non-computing {
     justify-content: center;
 }
 
-div.google-map {
-    display: flex;
-    overflow: auto;
-    justify-content: center;
+span {
+    margin-left: 10px;
 }
-  

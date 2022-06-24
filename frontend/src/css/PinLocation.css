@@ -7,10 +7,10 @@ div.pin-location-body {
   justify-content: center;
 }
 
-  button.sub {
-    color: white;
-    border-color: transparent;
-    border-radius: 30rem;
-    background-color: #0b6EFD;
-    float: left;
-  }
+button.sub {
+  color: white;
+  border-color: transparent;
+  border-radius: 30rem;
+  background-color: #0b6EFD;
+  float: left;
+}
