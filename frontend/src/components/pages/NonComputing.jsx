@@ -154,24 +154,25 @@ export default function NonComputing() {
                             <Form.Control type="description" ref={contentRef} required placeholder="Details/Description" as="textarea"/>
                         </Form.Group>
                         <Form.Label>Pin your location</Form.Label>
-
-                        <GoogleMap
-                            mapContainerStyle={mapContainerStyle}
-                            zoom={17}
-                            center={center}
-                            options={options}
-                            onClick={onMapClick}
-                        >
-                          { marker !== null &&
-                            <Marker 
-                              position={{ lat: marker.lat, lng: marker.lng }}
-                              icon={{
-                                url: "/you-are-here.png",
-                                scaledSize: new window.google.maps.Size(15, 15)
-                              }}
-                            />
-                          }
-                        </GoogleMap>
+                        <div class="google-map">
+                            <GoogleMap
+                                mapContainerStyle={mapContainerStyle}
+                                zoom={17}
+                                center={center}
+                                options={options}
+                                onClick={onMapClick}
+                            >
+                            { marker !== null &&
+                                <Marker 
+                                position={{ lat: marker.lat, lng: marker.lng }}
+                                icon={{
+                                    url: "/you-are-here.png",
+                                    scaledSize: new window.google.maps.Size(15, 15)
+                                }}
+                                />
+                            }
+                            </GoogleMap>
+                        </div>
                         <Form>
                             <Form.Group id="add-notes">
                                 <Form.Control type="notes" ref={locationRef} placeholder="Additional notes (e.g. floor)" as="textarea"/>
