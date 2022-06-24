@@ -184,7 +184,7 @@ export default function NonComputing() {
                         </Button>
                         <span/>
                         <Link to="/">
-                            <Button className="w-90 mt-3" type="button">
+                            <Button className="w-90 mt-3" type="button" variant="danger">
                                 Cancel
                             </Button>
                         </Link>
