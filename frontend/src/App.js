@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="background">
       <div className="topnav">
-        <h2 className="logo">AskDoc</h2>
+        <h2 className="logo">AskDoC</h2>
       </div>  
       <div className="main-body">
         <Router>
