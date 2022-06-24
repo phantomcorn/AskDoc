@@ -118,7 +118,7 @@ export default function HelperInfo() {
             <h5> Name : {helper.name} </h5>
             <h5> Email : {helper.email} </h5>
             <h5> Phone no. : {helper.phone} </h5>
-            <h5> Location: </h5>
+            <h5> Location : </h5>
             <div class="google-map">
               <GoogleMap
                   mapContainerStyle={mapContainerStyle}
@@ -141,7 +141,7 @@ export default function HelperInfo() {
               </GoogleMap>
             </div>
             <Legend/>
-            <h6> Helper's note : {location.state.helperNote} </h6>
+            <h6> Helper's notes : {location.state.helperNote} </h6>
             </div>
 
             {/* <div className="w-100 text-center mt-3">

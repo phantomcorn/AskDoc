@@ -55,6 +55,7 @@
 }
 
 div.main-body {
+  position: absolute;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -87,6 +88,6 @@ li {
   display: block;
   color: white;
   text-align: center;
-  padding: 5px 60px;
+  padding: 5px 0px;
   text-decoration: none;
 }
