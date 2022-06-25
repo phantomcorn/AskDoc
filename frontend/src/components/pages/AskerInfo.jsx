@@ -61,14 +61,16 @@ export default function AskerInfo() {
     }
 
     return (
-      <div class="asker-info-body">
+      <div class="row justify-content-center">
+          <div class="col-6">
           <div className="QuestionsList mb-3" class="question">
               <h5 class="title"> Question: {thread.title} </h5>
               <h6 class="content"> Description: {thread.content} </h6>
               <div class="link"> {linkState && link} </div>
           </div>
+          </div>
 
-          <div>
+          <div class="col-6">
             <div class="asker-info">
             <div className="w-100 text-center mt-3">
                 <h3>Asker's Information</h3>
@@ -101,12 +103,12 @@ export default function AskerInfo() {
             <Legend />
             <h6> Asker's note : {thread.askerNote} </h6>
             </div>
-            <Link to="/" onClick={handleRemove}>
+          </div>
+          <Link to="/" onClick={handleRemove}>
               <Button className="w-90 mt-3" type="button">
                 Finish
               </Button>
-            </Link>
-          </div>
+          </Link>
       </div>
     );
 };

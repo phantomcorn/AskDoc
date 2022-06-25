@@ -62,15 +62,17 @@ export default function HelperInfo() {
     if (!isLoaded) return "Loading map...";
 
     return (
-    <div class="helper-info-body">
+    <div class="row justify-content-center">
 
+        <div class="col-6">
         <div className="QuestionsList mb-3" class="question">
             <h5 class="title"> Your Question: {thread.title} </h5>
             <h6 class="content"> Description: {thread.content} </h6>
             <div class="link"> {linkState && link} </div>
         </div>
+        </div>
 
-        <div>
+        <div class="col-6">
           <div class="helper-info">
             <div className="w-100 text-center mt-3">
                   <h3>Helper's Information</h3>
@@ -103,12 +105,12 @@ export default function HelperInfo() {
             <Legend/>
             <h6> Helper's note : {location.state.helperNote} </h6>
           </div>
-          <Link to="/" onClick={handleRemove}>
+        </div>
+        <Link to="/" onClick={handleRemove}>
             <Button className="w-90 mt-3" type="button">
               Finish
             </Button>
           </Link>
-        </div>
      </div>
     );
 };
