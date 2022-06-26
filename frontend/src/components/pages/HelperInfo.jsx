@@ -107,7 +107,7 @@ export default function HelperInfo() {
           </div>
         </div>
         <Link to="/" onClick={handleRemove}>
-            <Button className="w-90 mt-3" type="button">
+            <Button className="w-90 mt-3" type="button" size="lg">
               Finish
             </Button>
           </Link>
