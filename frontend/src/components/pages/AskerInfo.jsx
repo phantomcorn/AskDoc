@@ -63,7 +63,7 @@ export default function AskerInfo() {
     return (
       <div class="row justify-content-center">
           <div class="col-6">
-          <div className="QuestionsList mb-3" class="question">
+          <div className="question" class="question">
               <h5 class="title"> Question: {thread.title} </h5>
               <h6 class="content"> Description: {thread.content} </h6>
               <div class="link"> {linkState && link} </div>
