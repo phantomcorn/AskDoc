@@ -14,7 +14,7 @@ import HelperInfo from './components/pages/HelperInfo';
 import PinLocation from './components/PinLocation';
 import WaitForLocation from './components/WaitForLocation';
 import { BrowserRouter as Router,Route,Routes,Link } from "react-router-dom";
-import {Container} from 'react-bootstrap'
+import DocSoc from "./assets/docsoc.png"
 import {AuthProvider} from "./contexts/AuthContext"
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
     <div className="background">
       <div className="topnav">
         <h2 className="logo">AskDoC</h2>
+        <img src={DocSoc}></img>
       </div>  
       <div className="main-body">
         <Router>
