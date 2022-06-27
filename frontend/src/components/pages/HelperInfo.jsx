@@ -103,7 +103,7 @@ export default function HelperInfo() {
               </GoogleMap>
             </div>
             <Legend/>
-            <h6> Helper's note : {location.state.helperNote} </h6>
+            <h5> Helper's note : {location.state.helperNote} </h5>
           </div>
         </div>
         <Link to="/" onClick={handleRemove}>

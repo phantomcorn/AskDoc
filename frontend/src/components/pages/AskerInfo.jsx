@@ -101,7 +101,7 @@ export default function AskerInfo() {
               </GoogleMap>
             </div>
             <Legend />
-            <h6> Asker's note : {thread.askerNote} </h6>
+            <h5> Asker's note : {thread.askerNote} </h5>
             </div>
           </div>
           <Link to="/" onClick={handleRemove}>
