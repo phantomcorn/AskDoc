@@ -28,8 +28,10 @@ export default function Dashboard() {
           <Card.Body>
               <h2 className="text-center mb-4">Profile</h2>
               {error && <Alert variant="danger">{error}</Alert>}
-              <strong>Email:</strong> {currentUser.email}
-              <strong> User: </strong> {currentUser.computing ? "computing" : "non-computing"}
+              <div class="info">
+                <strong>Name:</strong> {currentUser.name} {currentUser.computing? "(Computing)" : "(Non-computing)"}
+                <strong>Email:</strong> {currentUser.email}
+              </div>
               <Link to="/answer" className="btn btn-primary w-100 mt-3">
                   Answer a question
               </Link>
@@ -51,8 +53,10 @@ export default function Dashboard() {
           <Card.Body>
               <h2 className="text-center mb-4">Profile</h2>
               {error && <Alert variant="danger">{error}</Alert>}
-              <strong>Email:</strong> {currentUser.email}
-              <strong> User: </strong> {currentUser.computing? "computing" : "non-computing"}
+              <div class="info">
+                <strong>Name:</strong> {currentUser.name} {currentUser.computing? "(Computing)" : "(Non-computing)"}
+                <strong>Email:</strong> {currentUser.email}
+              </div>
               <Link to="/ask" className="btn btn-primary w-100 mt-3">
                   Ask a question
               </Link>

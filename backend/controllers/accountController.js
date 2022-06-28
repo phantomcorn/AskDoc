@@ -54,7 +54,7 @@ const login = asyncHandler(async (req, res) => {
     let user = await Account.findOne({email: email})
     if(user) {
         if(await bcrypt.compare(password,user.password)) {
-            res.status(200).send({email: email, password: user.password, computing: user.computing})
+            res.status(200).send({name: user.name, email: email, password: user.password, computing: user.computing})
         } else {
             res.status(400).send({message: "Incorrect password"})
         }
