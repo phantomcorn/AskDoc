@@ -1,9 +1,9 @@
 This is a 2nd university group project which has been imported from Imperial's Gitlab repository thereby contributors are not accurately shown. The members who contributed on this project are the following :
 
-Phantakorn Prarusudamkerng
-Purin Sukpanichnant
-Flora Wu
-Soham Gadgil
+Phantakorn Prarusudamkerng <br />
+Purin Sukpanichnant <br />
+Flora Wu <br />
+Soham Gadgil <br />
 
 
 To get started : 
